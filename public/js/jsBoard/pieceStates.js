@@ -58,7 +58,7 @@ pieceConductor.prototype.clearPieceClasses = function(){
 
 pieceConductor.prototype.appendImage = function(){
 	imgID = this.createImageID();
-	this.piece.children("img").attr("src","./public/img/koma/"+imgID+".png");
+	this.piece.children("img").attr("src",IMG_DIR+imgID+".png");
 }
 
 pieceConductor.prototype.createImageID = function (){

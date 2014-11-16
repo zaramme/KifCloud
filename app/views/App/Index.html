@@ -7,8 +7,8 @@
 <!--
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
 -->
-<link rel="stylesheet" href="public/css/shogi.css" type="test/css" />
-<link rel="stylesheet" href="public/js/jquery-ui/jquery-ui.css" />
+<link rel="stylesheet" href="public/js/jsBoard/shogi.css" type="text/css" />
+<link rel="stylesheet" href="public/js/jquery-ui/jquery-ui.css" type="text/css" />
 
 <!-- 外部プラグイン読み込み(API経由) -->
 <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -20,6 +20,7 @@
 <script src="public/js/jquery-ui/jquery-ui.min.js"></script>
 
 <!-- ライブラリ読み取り -->
+<script src="public/js/jsBoard/jsBoard.js"></script>
 <script src="public/js/jsBoard/utility.js"></script>
 <script src="public/js/jsBoard/define.js"></script>
 <script src="public/js/jsBoard/pieceStates.js"></script>
@@ -29,7 +30,6 @@
 <script src="public/js/jsBoard/move.js"></script>
 <script src="public/js/jsBoard/api.js"></script>
 <script src="public/js/jsBoard/controller.js"></script>
-<script src="public/js/jsBoard/shogi.js"></script>
 <!--
 <script src="js/define.js"></script>
 <script src="js/api.js"></script>
@@ -44,7 +44,7 @@
 <div class="board" >
 
   <div class="bg" id="boardimg">
-    <img src="public/img/board/japanese-chess-b02.jpg" height="640" width="600" />
+    <img id="bgboard" src="" height="640" width="600" />
   </div>
   <div class="piece_area onboard x9 y1" id="pos_91" > </div>
   <div class="piece_area onboard x8 y1" id="pos_81" > </div>

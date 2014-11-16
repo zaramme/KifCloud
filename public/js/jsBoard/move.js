@@ -249,7 +249,7 @@ moveMethods.prototype.appendPieceClasses
 // 画像を変更する
 moveMethods.prototype.appendImage = function(pieceObj, kindOfPiece, isBlack, isPromoted){
 	imgID = this.createImageID(kindOfPiece,isBlack, isPromoted);
-	pieceObj.children("img").attr("src","./public/img/koma/"+imgID+".png");
+	pieceObj.children("img").attr("src",IMG_DIR+"/"+imgID+".png");
 }
 
 moveMethods.prototype.addPieceCountText = function(target,length){

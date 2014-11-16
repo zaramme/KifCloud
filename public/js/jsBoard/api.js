@@ -8,7 +8,7 @@ $(function(){
 function apiLoadBoard(callback,filename){
 	var methods = new apiMethods();
 	moveAllPieceInDock();
-	debug("盤面の初期化が完了しました")
+	debug("盤面の読み込みが完了しました")
 
 	var fileurl = './json/' + filename;
 
@@ -21,6 +21,21 @@ function apiLoadBoard(callback,filename){
 		},
 		error: function(){debug("jsonファイルの読み込みに失敗しました filename = ." + fileurl);}
 
+	}).then(function(){ callback("loaded");});
+}
+
+function apiInitBoard(callback){
+	var methods = new apiMethods();
+
+	moveAllPieceInDock();
+	$.ajax({
+		url: API_RSH,
+		dataType: 'json',
+		success: function(data){
+			debug("jsonを取得しました");
+			methods.constructBoardFrom(data);
+			IsBoardInit =true;
+		}
 	}).then(function(){ callback("loaded");});
 }
 
@@ -40,22 +55,6 @@ function apiGetRshCode(callback,currentRsh,Movecode){
 		},
 		error: function(){debug("jsonファイルの読み込みに失敗しました filename = ." + fileurl);}
 
-	}).then(function(){ callback("loaded");});
-}
-
-
-function apiInitBoard(callback){
-	var methods = new apiMethods();
-
-	moveAllPieceInDock();
-	$.ajax({
-		url: './board/',
-		dataType: 'json',
-		success: function(data){
-			debug("jsonを取得しました");
-			methods.constructBoardFrom(data);
-			IsBoardInit =true;
-		}
 	}).then(function(){ callback("loaded");});
 }
 
