@@ -6,13 +6,11 @@ type App struct {
 	*revel.Controller
 }
 
-func (c App) Index() revel.Result {
-	value1 := "hello world"
-	values2 := []string{"this is a pen.", "my name is Taroh."}
-	return c.Render(value1, values2)
-}
+func (c App) Index(code string) revel.Result {
+	if len(code) > 0 {
+		return c.Render(code)
 
-func (c App) Value() revel.Result {
-	values := []int{1, 2, 3, 4, 5}
-	return c.RenderJson(values)
+	} else {
+		return c.Render()
+	}
 }

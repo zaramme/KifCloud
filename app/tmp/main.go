@@ -33,19 +33,14 @@ func main() {
 			&revel.MethodType{
 				Name: "Index",
 				Args: []*revel.MethodArg{ 
+					&revel.MethodArg{Name: "code", Type: reflect.TypeOf((*string)(nil)) },
 				},
 				RenderArgNames: map[int][]string{ 
-					12: []string{ 
-						"value1",
-						"values2",
+					11: []string{ 
+						"code",
 					},
-				},
-			},
-			&revel.MethodType{
-				Name: "Value",
-				Args: []*revel.MethodArg{ 
-				},
-				RenderArgNames: map[int][]string{ 
+					14: []string{ 
+					},
 				},
 			},
 			
@@ -73,6 +68,35 @@ func main() {
 				Args: []*revel.MethodArg{ 
 					&revel.MethodArg{Name: "code", Type: reflect.TypeOf((*string)(nil)) },
 					&revel.MethodArg{Name: "move", Type: reflect.TypeOf((*string)(nil)) },
+				},
+				RenderArgNames: map[int][]string{ 
+				},
+			},
+			&revel.MethodType{
+				Name: "Test",
+				Args: []*revel.MethodArg{ 
+					&revel.MethodArg{Name: "str", Type: reflect.TypeOf((*string)(nil)) },
+				},
+				RenderArgNames: map[int][]string{ 
+				},
+			},
+			
+		})
+	
+	revel.RegisterController((*controllers.Panel)(nil),
+		[]*revel.MethodType{
+			&revel.MethodType{
+				Name: "GetDescription",
+				Args: []*revel.MethodArg{ 
+					&revel.MethodArg{Name: "code", Type: reflect.TypeOf((*string)(nil)) },
+				},
+				RenderArgNames: map[int][]string{ 
+				},
+			},
+			&revel.MethodType{
+				Name: "PutDescription",
+				Args: []*revel.MethodArg{ 
+					&revel.MethodArg{Name: "code", Type: reflect.TypeOf((*string)(nil)) },
 				},
 				RenderArgNames: map[int][]string{ 
 				},

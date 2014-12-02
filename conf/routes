@@ -4,16 +4,22 @@
 
 module:testrunner
 
-GET     /                                       App.Index
+GET     /                       App.Index
 
-GET 	/api/board/									Board.Init
-	
-GET		api/board/:code								Board.getBoard
+GET 	/board/:code			App.Index
 
-GET 	/api/rsh/									Board.Init
+# API Endpoints
+GET 	/api/board/				Board.Init	
+GET		/api/board/:code		Board.getBoard
+GET   	/api/board/:code/:move	Board.getBoardWithMove
+
+GET 	/api/description/:code  Panel.GetDescription
+
+PUT		/api/description/:code  Panel.PutDescription
+
+GET 	/api/rsh/				Board.Init
 
 
-GET   	api/board/:code/:move						Board.getBoardWithMove
 # Ignore favicon requests
 GET     /favicon.ico                            404
 

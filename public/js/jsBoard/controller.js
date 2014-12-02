@@ -4,6 +4,7 @@ $(function(){
 
 $(".board").css('background','url(\''+IMG_DIR+'/japanese-chess-bg.jpg\')')
 $("#bgboard").attr("src",IMG_DIR+"/japanese-chess-b02.jpg");
+
 apiInitBoard(refreshClickablePieceSetting);
 
 $("#button1").click(function(){
@@ -15,6 +16,13 @@ $("#button2").click(function(){apiInitBoard(refreshClickablePieceSetting)});
 $("#button3").click(function(){apiLoadBoard(refreshClickablePieceSetting,"test1.json")});
 });
 
+
+// パネル更新イベントの発生
+function panelReloadTrigger(){
+	debug("パネル更新トリガーが呼び出されました");
+	var reloadPanel = new $.Event("reloadPanel")
+	$(".panel").trigger("reloadPanel");
+}
 
 // 選択可能な駒のセット
 function refreshClickablePieceSetting(){

@@ -42,6 +42,27 @@ function getPieceName(PieceObj){
 		return false;
 }
 
+function getPieceCodeName(PieceObj){
+	if(PieceObj.hasClass("OH"))
+		return "OH";
+	else if(PieceObj.hasClass("KIN"))
+		return "KI";
+	else if(PieceObj.hasClass("GIN"))
+		return "GI";
+	else if(PieceObj.hasClass("KEI"))
+		return "KE";
+	else if(PieceObj.hasClass("KYO"))
+		return "KY";
+	else if(PieceObj.hasClass("KAKU"))
+		return "KA";
+	else if(PieceObj.hasClass("HISHA"))
+		return "HI";
+	else if(PieceObj.hasClass("FU"))
+		return "FU";
+	else
+		return false;
+}
+
 
 function getPieceObject(posID){
 	return $(selectAreaID(posID)).children(".piece");

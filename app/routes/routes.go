@@ -9,17 +9,12 @@ var App tApp
 
 
 func (_ tApp) Index(
+		code string,
 		) string {
 	args := make(map[string]string)
 	
+	revel.Unbind(args, "code", code)
 	return revel.MainRouter.Reverse("App.Index", args).Url
-}
-
-func (_ tApp) Value(
-		) string {
-	args := make(map[string]string)
-	
-	return revel.MainRouter.Reverse("App.Value", args).Url
 }
 
 
@@ -52,6 +47,38 @@ func (_ tBoard) GetBoardWithMove(
 	revel.Unbind(args, "code", code)
 	revel.Unbind(args, "move", move)
 	return revel.MainRouter.Reverse("Board.GetBoardWithMove", args).Url
+}
+
+func (_ tBoard) Test(
+		str string,
+		) string {
+	args := make(map[string]string)
+	
+	revel.Unbind(args, "str", str)
+	return revel.MainRouter.Reverse("Board.Test", args).Url
+}
+
+
+type tPanel struct {}
+var Panel tPanel
+
+
+func (_ tPanel) GetDescription(
+		code string,
+		) string {
+	args := make(map[string]string)
+	
+	revel.Unbind(args, "code", code)
+	return revel.MainRouter.Reverse("Panel.GetDescription", args).Url
+}
+
+func (_ tPanel) PutDescription(
+		code string,
+		) string {
+	args := make(map[string]string)
+	
+	revel.Unbind(args, "code", code)
+	return revel.MainRouter.Reverse("Panel.PutDescription", args).Url
 }
 
 

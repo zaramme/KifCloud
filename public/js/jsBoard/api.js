@@ -29,29 +29,31 @@ function apiInitBoard(callback){
 
 	moveAllPieceInDock();
 	$.ajax({
-		url: API_RSH,
+		url: API_RSH + "/" + document.info.rsh.value,
 		dataType: 'json',
 		success: function(data){
 			debug("jsonを取得しました");
 			methods.constructBoardFrom(data);
+			document.info.rsh.value = data.Rsh
 			IsBoardInit =true;
 		}
 	}).then(function(){ callback("loaded");});
 }
 
 function apiGetRshCode(callback,currentRsh,Movecode){
-	var methods = new apiMethods();
-	moveAllPieceInDock();
-	debug("盤面の初期化が完了しました")
 
-	var fileurl = '/board/' + currentRsh + '/' + Movecode;
-
+	var fileurl;
+	fileurl = '/api/board';
+	if (currentRsh != "" && Movecode != "") {
+		fileurl = fileurl + '/' + currentRsh + '/' + Movecode;
+	}	
 	$.ajax({
 		url: fileurl,
 		dataType: 'json',
 		success: function(data){
 					debug("jsonを取得しました");
-					methods.constructBoardFrom(data);
+					document.info.rsh.value = data.Rsh;
+					panelReloadTrigger();
 		},
 		error: function(){debug("jsonファイルの読み込みに失敗しました filename = ." + fileurl);}
 

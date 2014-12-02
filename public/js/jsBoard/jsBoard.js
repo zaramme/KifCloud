@@ -1,12 +1,12 @@
 
 // ディレクトリ用パラメータ
-const HOST = "."
+const HOST = ""
 
 const BOARD_INIT = HOST + "/board/"
 const BOARD_LOAD = HOST + "/board/"
 
 const API_DIR = HOST + "/api"
-const API_RSH = API_DIR + "/rsh/"
+const API_RSH = API_DIR + "/board"
 const API_MOVE = API_DIR + "/rsh/"
 
 const IMG_DIR = HOST + "/public/img/jsBoard"

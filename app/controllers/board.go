@@ -38,3 +38,10 @@ func (c Board) GetBoardWithMove(code, move string) revel.Result {
 	json, _ := j.BoardToJson(brd)
 	return c.RenderJson(json)
 }
+
+func (c Board) Test(str string) revel.Result {
+	if len(str) > 0 {
+		return c.RenderJson(str)
+	}
+	return c.RenderJson("test is clear")
+}

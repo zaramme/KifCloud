@@ -11,7 +11,7 @@ $(function(){
 function doMovePiece(pos,PieceToMove,isPromoted){
 	var methods = new moveMethods();
 	var fromPos = getPosFromPiece(PieceToMove);	// 移動前の座標を保持しておく
-	var kindToMove = getPieceName(PieceToMove);
+	var kindToMove = getPieceCodeName(PieceToMove);
 	var PieceToCapture = getPieceObject(pos);
 
 	// 駒を移動する
@@ -306,6 +306,8 @@ moveMethods.prototype.FinishMove = function(fromPos,toPos,kindOfPiece,isPromoted
 	sortCapturedArea();
 
 	debug("着手を完了しました。移動コード…"+moveCode);
+
+	apiGetRshCode(function(){return},document.info.rsh.value, moveCode);
 
 	if(isBlackTurn)
 		debug("先手の手番です");
