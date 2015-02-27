@@ -60,6 +60,7 @@ function sortCapturedArea(pos){
 
 	if(pos == null)
 	{
+		// 引数指定がない場合は先手、後手両方に処理
 		sortCapturedArea("bc");
 		sortCapturedArea("wc");
 		return;
@@ -69,6 +70,7 @@ function sortCapturedArea(pos){
 	var methods = new moveMethods();
 	var capturedArea = $("#pos_" + pos);
 
+	// すべての属性を一旦削除
 	capturedArea.children('.piece').removeClass('forefront');
 	capturedArea.children('.piece').removeClass('omitted');
 	capturedArea.children(".test").remove();
@@ -82,11 +84,13 @@ function sortCapturedArea(pos){
 			if(isForefront)
 			{
 				$(this).addClass('forefront');
-				isForefront = false;
+				isForefront = false; // isForfrontは一枚のみ
+				//debug("[駒台]______isforefrontを設定します @ " + $(this).attr("id"));
 				return;
 			}
 			// 同じ種類の駒が２種類ある場合は、２枚目以降を表示しない（枚数で表示）
 			$(this).addClass("omitted");
+			//debug("[駒台]______omittedを設定します @ " + $(this).attr("id"));
 		});
 	});
 

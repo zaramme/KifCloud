@@ -8,17 +8,19 @@ GET     /                       App.Index
 
 GET 	/board/:code			App.Index
 
+GET     /uploader				App.Submit
+
+GET 	/login					Auth.Login
+GET 	/token 					Auth.GetToken
 # API Endpoints
 GET 	/api/board/				Board.Init	
 GET		/api/board/:code		Board.getBoard
 GET   	/api/board/:code/:move	Board.getBoardWithMove
-
 GET 	/api/description/:code  Panel.GetDescription
-
 PUT		/api/description/:code  Panel.PutDescription
-
 GET 	/api/rsh/				Board.Init
-
+GET 	/api/kifu/:kifuID				Kifu.GetKifu
+POST    /api/kifupload          Kifu.Upload
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

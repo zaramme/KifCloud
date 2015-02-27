@@ -87,6 +87,14 @@
 	visibility: hidden;
 }
 
+/* 駒台処理で使用しているため削除しない！*/
+.test{
+	position: relative;
+	height:55px;
+/*	border:solid 1px #0000FF; */
+	padding-top:10px;
+}
+
 /* 駒の座標系 /////////////////////////////////////////////////////////////////////// */
 .x9{left:105px;} .x8{left:155px;} .x7{left:205px;} .x6{left:255px;} .x5{left:305px;}
  .x4{left:355px;} .x3{left:405px;}.x2{left:455px;} .x1{left:505px;}

@@ -2,7 +2,7 @@ $(function(){
 debug("panelDescription.jsを読み込みました");
 
 function apiLoadDescription(){
-	fileurl = '/api/description/' + document.info.rsh.value 
+	fileurl = '/api/description/' + document.info.rsh.value;
 	debug("api通信：api.description param ... " + document.info.rsh.value);
 
 	$.ajax({

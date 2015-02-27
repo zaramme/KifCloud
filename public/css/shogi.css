@@ -1,0 +1,165 @@
+@charset "utf-8"; /*utf-8の場合*/
+
+h1{
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.board{
+	border: 1px solid #999999;
+	width: 800px;
+	position: relative;
+	height: 640px;
+	float: left;
+	margin-right: 10px;
+	z-index:200;
+	}
+
+.black_captured_area, .white_captured_area
+{
+/*	background: url('../img/board/japanese-chess-bg.jpg');
+*/	border: 1px solid #999999;
+	width: 200px;
+	height: 230px;
+	overflow : hidden;
+	padding: 10px;
+	z-index:200;
+	position: relative;
+}
+
+.piece_area{
+	position: absolute;
+}
+
+.onboard{
+	width : 60px;
+	height: 65px;
+}
+
+.captured{
+	width : 90px;
+	height: 350px;
+	line-height:0px;
+	border: dotted 1px #FF0000;
+}
+
+.piece{
+	margin:0px;
+	width : 60px;
+	height: 63px;
+	float:left;
+	clear: both;
+/*	border:solid 1px #FF0000; */
+}
+
+.test{
+	position: relative;
+	height:55px;
+/*	border:solid 1px #0000FF; */
+	padding-top:10px;
+}
+.selected{
+    background-color: rgba(51,51,51,0.6);
+ }
+
+.lastmoved{
+    background-color: rgba(160,51,51,0.6);
+ }
+
+.draggable{
+	cursor: pointer;
+}
+
+.movable{
+	background-color:  rgba(51,101,51,0.6);
+}
+
+.dropin{
+	background-color: rgba(71,150,71,0.8);
+}
+
+.moveto{
+	background-color: rgba(71,150,71,0.8);
+}
+.captured-header{
+	visibility: visible;
+}
+
+.captured-semiheader{
+	visibility: visible;
+}
+
+.omitted{
+	visibility: hidden;
+}
+
+/* 駒の座標系 /////////////////////////////////////////////////////////////////////// */
+.x9{left:130px;} .x8{left:190px;} .x7{left:250px;} .x6{left:310px;} .x5{left:370px;}
+ .x4{left:431px;} .x3{left:490px;}.x2{left:550px;} .x1{left:610px;}
+
+.y1{top:29px;} .y2{top:92px;} .y3{top:157px;} .y4{top:220px;} .y5{top:284px;}
+.y6{top:349px;} .y7{top:413px;}.y8{top:478px;} .y9{top:543px;}
+
+.wc{top:30px; left:10px;}	.bc{top:250px; left:700px;}
+
+.bg{position: absolute;}
+
+.dock{visibility: hidden;}
+
+#boardimg{
+	left:100px;
+}
+
+#debug{
+	border: 1px dotted #999999;
+	width: 400px;
+	height: 300px;
+	font-size:12px;
+	line-height: 120%;
+	overflow-y : scroll;
+}
+
+#selectbox{
+	position: absolute;
+	visibility: hidden;
+	top: 480px;
+	left: 20px;
+	width: 80px;
+	height: 55px;
+	z-index:1000;
+}
+
+.button{
+	cursor: pointer;
+	float:left;
+	width: 35px;
+	border: solid 1px #999999;
+	height: 30px;
+	border-radius: 5px;
+	background: rgba(200,200,200,0.8);
+	text-align: center;
+}
+
+#unpromotion
+{
+	margin-left: 3px;
+
+}
+
+#ghost{
+	width: 60px;
+	height: 61px;
+}
+
+#ghost.virtual{
+	opacity: 0.5;
+}
+#ghost.hidden
+{
+	visibility:hidden;
+}
+
+.hidden{
+	visibility: hidden;
+}
+

@@ -1,25 +1,7 @@
-.panel{
-	width:200px;
-}
-
-.panel h2{
-	font-size:13pt;
-	margin: 0px 5px 5px 5px ;
-}
 
 #RshPanel{
-	background-color: #FFCCCC;
-	border: solid 1px #999999;
-	width: 100%;
-	height: 100%;
 }
 
-#PanelDescription{
-	background-color: #CCFFCC;
-	border: solid 1px #999999;
-	width:100%;
-	height: 100%;
-}
 
 #PanelDescription #Description{
 	background-color: #FFFFFF;

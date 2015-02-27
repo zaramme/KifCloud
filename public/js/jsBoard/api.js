@@ -24,6 +24,25 @@ function apiLoadBoard(callback,filename){
 	}).then(function(){ callback("loaded");});
 }
 
+function apiReload(rsh){
+	var methods = new apiMethods();
+
+	moveAllPieceInDock();
+	$.ajax({
+		url: API_RSH + "/" + rsh,
+		dataType: 'json',
+		success: function(data){
+			debug("jsonを取得しました");
+			methods.constructBoardFrom(data);
+			document.info.rsh.value = data.Rsh
+			IsBoardInit =true;
+		}
+	}).then(function(){ 
+		refreshClickablePieceSetting();
+	});
+
+}
+
 function apiInitBoard(callback){
 	var methods = new apiMethods();
 
@@ -37,7 +56,8 @@ function apiInitBoard(callback){
 			document.info.rsh.value = data.Rsh
 			IsBoardInit =true;
 		}
-	}).then(function(){ callback("loaded");});
+	}).then(function(){ 
+		callback("loaded");});
 }
 
 function apiGetRshCode(callback,currentRsh,Movecode){
@@ -53,6 +73,8 @@ function apiGetRshCode(callback,currentRsh,Movecode){
 		success: function(data){
 					debug("jsonを取得しました");
 					document.info.rsh.value = data.Rsh;
+					document.info.rshPrev.value = currentRsh;
+					document.info.currentMove.value = Movecode;
 					panelReloadTrigger();
 		},
 		error: function(){debug("jsonファイルの読み込みに失敗しました filename = ." + fileurl);}
@@ -61,10 +83,6 @@ function apiGetRshCode(callback,currentRsh,Movecode){
 }
 
 var apiMethods = function(){}
-
-apiMethods.prototype.callApi = function(url){
-
-}
 
 apiMethods.prototype.constructBoardFrom = function(data){
 		// 手番の取得
@@ -80,7 +98,15 @@ apiMethods.prototype.constructBoardFrom = function(data){
 			var isBlack = obj["Ply"];
 			var isPromoted = obj["IsPrm"];
 
-			// 駒を配置
+			// 持ち駒の場合の処理
+			if (posID == 0 && isBlack) {	
+				debug("持ち駒を配置します。")				
+				posID = "bc";
+			} else if (posID == 0 && !isBlack){
+				debug("持ち駒を配置します。（後手）")
+				posID = "wc";
+			}
+			 
 			movePieceFromDock(posID,kindOfPiece,isBlack,isPromoted);
 		}
 
