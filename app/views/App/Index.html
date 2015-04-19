@@ -18,9 +18,6 @@
 <!-- fonts -->
 <link href='http://fonts.googleapis.com/css?family=Abel|Hammersmith+One|Jura:400,600|Montserrat:400,700|NTR' rel='stylesheet' type='text/css'>
 
-<link href="/public/Bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="/public/css/panel.css" type="text/css" />
-<link rel="stylesheet" href="/public/js/jsBoard/shogi.css" type="text/css" />
 
 <!-- AdminLTE App -->
 <script src="/public/AdminLTE/js/AdminLTE/app.js" type="text/javascript"></script>
@@ -83,37 +80,38 @@
   <div class="row">
     <!-- Left col -->
   <section class="col-lg-8">
-  <div class="row">
-  <section class="col-lg-2">
-    <div class="box" style="height:650px;">
-      <div class="box-header"><i class="ion ion-clipboard"></i>                                  
-<h5>指し手</h4></div>
-     <div class="box-body no-padding" style=" height:550px; overflow-y : scroll;">
-      {{template "Panel/PanelMoveList.html"}}
-     </div>
-    </div>                        
-   </section>
+    <div class="row">
+      <section class="col-lg-2">
+         <div class="box" style="height:650px;">
+        <div class="box-header"><i class="ion ion-clipboard"></i>
+        <h5>指し手</h4>
+        </div>
+        <div class="box-body no-padding" style=" height:550px; overflow-y : scroll;">
+        {{template "Panel/PanelMoveList.html"}}
+        </div>
+        </div>                        
+        </section>
 
-   <section class="col-lg-10 connectedSortable">                            
-
-    <!-- Custom tabs (Charts with tabs)-->
-<!--   <div class="box" style="height:650px;">
+      <section class="col-lg-10 connectedSortable">
+      <!-- Custom tabs (Charts with tabs)-->
+      <div class="box" style="height:650px;">
       <div class="box-header">
         <div class="box-tools pull-right">
           <button class="btn btn-default btn-sm" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i>
           </button>
         </div>
       </div>
-   <div class="box-body" style="height:200px;">
- -->    <div id="jsBoard">
-    {{template "jsBoard/jsBoard.html". }}
+      <div class="box-body" style="height:200px;">
+        <div id="jsBoard">
+        {{template "jsBoard/jsBoard.html". }}
+        </div>
+      <!-- /.box-body -->
+      </div>
+      </div>
+   
+      </section>
     </div>
- <!--  　</div>/.box-body
-   </div>
-  --> 
 </section>
-  </div>
-  </section>
 <!-- /.Left col -->
   
   <!-- right col (We are only adding the ID to make the widgets sortable)-->

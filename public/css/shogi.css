@@ -7,11 +7,10 @@ h1{
 
 .board{
 	border: 1px solid #999999;
-	width: 800px;
+	width: 640px;
 	position: relative;
-	height: 640px;
+	height: 540px;
 	float: left;
-	margin-right: 10px;
 	z-index:200;
 	}
 
@@ -34,6 +33,7 @@ h1{
 .onboard{
 	width : 60px;
 	height: 65px;
+	border: dotted 1px #FF0000;
 }
 
 .captured{
@@ -102,12 +102,14 @@ h1{
 
 .wc{top:30px; left:10px;}	.bc{top:250px; left:700px;}
 
-.bg{position: absolute;}
+.bg{position: absolute;
+	width:660px;
+	height:540px;
+}
 
 .dock{visibility: hidden;}
 
 #boardimg{
-	left:100px;
 }
 
 #debug{

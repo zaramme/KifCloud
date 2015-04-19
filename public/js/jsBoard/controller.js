@@ -2,8 +2,8 @@
 
 $(function(){
 
-$(".board").css('background','url(\''+IMG_DIR+'/japanese-chess-bg.jpg\')')
-$("#bgboard").attr("src",IMG_DIR+"/japanese-chess-b02.jpg");
+$(".board").css('background','url(\''+IMG_DIR+'/japanese-chess-b02.png\')')
+$("#bgboard").attr("src",IMG_DIR+"/japanese-chess-b02.png");
 
 apiInitBoard(refreshClickablePieceSetting);
 
