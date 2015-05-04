@@ -10,7 +10,7 @@ $(function(){
 
 function debug(message)
 {
-	if(IsDebugMode){
+	if(IsDebugMode && $(".debugend").get(0)){
 		$(".debugend").removeClass("debugend");
 		$("#debug").append("<div class=\"debugend\">" +message + "</div>");
 		$("#debug").scrollTop($(".debugend").offset().top);
