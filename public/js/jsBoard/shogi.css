@@ -1,8 +1,7 @@
 @charset "utf-8"; /*utf-8の場合*/
 
 .board{
-	border: 1px solid #999999;
-	width: 685px;
+	width: 660px;
 	position: relative;
 	height: 540px;
 	}
@@ -31,7 +30,7 @@
 */}
 
 .captured{
-	width : 80px;
+	width : 60px;
 	height: 360px;
 	line-height:0px;
 	border: dotted 1px #FF0000;
@@ -99,10 +98,10 @@
 .x9{left:105px;} .x8{left:155px;} .x7{left:205px;} .x6{left:255px;} .x5{left:305px;}
  .x4{left:355px;} .x3{left:405px;}.x2{left:455px;} .x1{left:505px;}
 
-.y1{top:25px;} .y2{top:78px;} .y3{top:131px;} .y4{top:184px;} .y5{top:238px;}
-.y6{top:291px;} .y7{top:344px;}.y8{top:397px;} .y9{top:452px;}
+.y1{top:32px;} .y2{top:85px;} .y3{top:138px;} .y4{top:191px;} .y5{top:244px;}
+.y6{top:297px;} .y7{top:350px;}.y8{top:404px;} .y9{top:457px;}
 
-.wc{top:25px; left:10px;}	.bc{top:145px; left:590px;}
+.wc{top:25px; left:10px;}	.bc{top:145px; left:586px;}
 
 .bg{position: absolute;}
 

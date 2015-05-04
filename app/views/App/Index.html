@@ -1,55 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>KifCloud</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>KifCloud</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <!-- css styles -->
   <link rel="stylesheet" href="/public/js/jsBoard/shogi.css" type="text/css" />
   <link rel="stylesheet" href="/public/css/index.css" type="text/css" />
   <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-<!-- Ionicons -->
-<link href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-<!-- Theme style -->
+  <link href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+  <link href="/public/AdminLTE/css/AdminLTE.css" rel="stylesheet" type="text/css" />
+  <link href='http://fonts.googleapis.com/css?family=Abel|Hammersmith+One|Jura:400,600|Montserrat:400,700|NTR' rel='stylesheet' type='text/css'>
 
-<link href="/public/AdminLTE/css/AdminLTE.css" rel="stylesheet" type="text/css" />
+  <!-- <script src="/public/js/jquery/jquery-1.11.1.js"></script>
+  <script src="/public/js/jquery-ui/jquery-ui.min.js"></script>-->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js" type="text/javascript"></script>
+  <script src="/public/Bootstrap/js/bootstrap.min.js"></script>
+  <script src="/public/AdminLTE/js/AdminLTE/dashboard.js" type="text/javascript"></script>
+  <script src="/public/AdminLTE/js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.js"></script>
 
-
-<!-- fonts -->
-<link href='http://fonts.googleapis.com/css?family=Abel|Hammersmith+One|Jura:400,600|Montserrat:400,700|NTR' rel='stylesheet' type='text/css'>
-
-
-<!-- AdminLTE App -->
-<script src="/public/AdminLTE/js/AdminLTE/app.js" type="text/javascript"></script>
-<script src="/public/AdminLTE/js/AdminLTE/dashboard.js" type="text/javascript"></script>
-
-
-<!-- 外部プラグイン読み込み(API経由) -->
-<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
--->
-<!-- 外部プラグイン読み込み(ローカル) -->
-
-<!-- <script src="/public/js/jquery/jquery-1.11.1.js"></script>
-<script src="/public/js/jquery-ui/jquery-ui.min.js"></script>-->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js" type="text/javascript"></script>
-<script src="/public/Bootstrap/js/bootstrap.min.js"></script>
-
-<!-- ライブラリ読み取り -->
-<script src="/public/js/jsBoard/jsBoard.js"></script>
-<script src="/public/js/jsBoard/utility.js"></script>
-<script src="/public/js/jsBoard/define.js"></script>
-<script src="/public/js/jsBoard/pieceStates.js"></script>
-<script src="/public/js/jsBoard/bitBoard.js"></script>
-<script src="/public/js/jsBoard/triBoard.js"></script>
-<script src="/public/js/jsBoard/movable.js"></script>
-<script src="/public/js/jsBoard/move.js"></script>
-<script src="/public/js/jsBoard/api.js"></script>
-<script src="/public/js/jsBoard/controller.js"></script>
-<script src="/public/js/panelInfo.js"></script>
-<script src="/public/js/panelDescription.js"></script>
-<script src="/public/js/panelMoveList.js"></script>
+  <script src="public/js/jsBoard/api.js" type="text/javascript"></script>
+  <script src="public/js/jsBoard/bitBoard.js" type="text/javascript"></script>
+  <script src="public/js/jsBoard/controller.js" type="text/javascript"></script>
+  <script src="public/js/jsBoard/define.js" type="text/javascript"></script>
+  <script src="public/js/jsBoard/jsBoard.js" type="text/javascript"></script>
+  <script src="public/js/jsBoard/movable.js" type="text/javascript"></script>
+  <script src="public/js/jsBoard/move.js" type="text/javascript"></script>
+  <script src="public/js/jsBoard/pieceStates.js" type="text/javascript"></script>
+  <script src="public/js/jsBoard/triBoard.js" type="text/javascript"></script>
+  <script src="public/js/jsBoard/utility.js" type="text/javascript"></script>
 </head>
 <body class="skin-blue">
 
@@ -76,75 +56,38 @@
 
   <!-- Main content -->
   <section class="content">
-
-  <div class="row">
-    <!-- Left col -->
-  <section class="col-lg-8">
-    <div class="row">
-      <section class="col-lg-2">
-         <div class="box" style="height:650px;">
-        <div class="box-header"><i class="ion ion-clipboard"></i>
-        <h5>指し手</h4>
-        </div>
-        <div class="box-body no-padding" style=" height:550px; overflow-y : scroll;">
-        {{template "Panel/PanelMoveList.html"}}
-        </div>
-        </div>                        
-        </section>
-
-      <section class="col-lg-10 connectedSortable">
-      <!-- Custom tabs (Charts with tabs)-->
-      <div class="box" style="height:650px;">
-      <div class="box-header">
+    <!-- Default box -->
+    <div class="box">
+      <div class="box-header with-border">
+        <h3 class="box-title">局面</h3>
         <div class="box-tools pull-right">
-          <button class="btn btn-default btn-sm" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i>
-          </button>
+          <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
+          <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
         </div>
       </div>
-      <div class="box-body" style="height:200px;">
-        <div id="jsBoard">
-        {{template "jsBoard/jsBoard.html". }}
+      <div class="box-body">
+        {{template "jsBoard/jsBoard.html"}}
+      </div><!-- /.box-body -->
+    </div><!-- /.box -->
+
+    <!-- Default box -->
+    <div class="box">
+      <div class="box-header with-border">
+        <h3 class="box-title">局面</h3>
+        <div class="box-tools pull-right">
+          <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
+          <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
         </div>
-      <!-- /.box-body -->
       </div>
-      </div>
-   
-      </section>
-    </div>
-</section>
-<!-- /.Left col -->
+      <div class="box-body">
+        {{template "Panel/PanelDebug.html"}}
+      </div><!-- /.box-body -->
+    </div><!-- /.box -->
+  </section>
+
+  </section>
   
-  <!-- right col (We are only adding the ID to make the widgets sortable)-->
-  <section class="col-lg-4 connectedSortable"> 
-
-                            {{template "Panel/RshPanel.html".}}
-
-                            {{template "Panel/RshDescription.html". }}
-
-  <!-- Default box -->
-  <div class="box">
-    <div class="box-header">
-      <i class="ion ion-clipboard"></i>                                  
-      <h3 class="box-title">debug console</h3>
-      <div class="box-tools pull-right">
-      <button class="btn btn-default btn-sm" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
-      </div>
-    </div>
-    <div class="box-body" style="height:300px;">
-      {{template "Panel/PanelDebug.html".}}
-    </div><!-- /.box-body -->
-  </div><!-- /.box -->
-
-  </section><!-- right col -->
-</div><!-- /.row (main row) -->
-
-
-
-</section><!-- /.content -->
-</aside><!-- /.right-side -->
-</div><!-- ./wrapper -->
-
-
-
-</body>
+ <!-- AdminLTE App -->
+    <script src="/public/AdminLTE/js/AdminLTE/app.js" type="text/javascript"></script>
+<!-- AdminLTE App -->
 </html>
