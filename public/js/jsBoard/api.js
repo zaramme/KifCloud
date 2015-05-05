@@ -43,9 +43,32 @@ function apiReload(rsh){
 
 }
 
-function apiInitBoard(callback){
+function apiReloadwithMoveCode(rsh, moveCode){
 	var methods = new apiMethods();
 
+	moveAllPieceInDock();
+	$.ajax({
+		url: API_RSH + "/" + rsh,
+		dataType: 'json',
+		success: function(data){
+			// console.log("@apiReloadwithMoveCode: rsh = "+rsh);
+			// console.log("@apiReloadwithMoveCode: Data");
+			// console.log(data);
+			debug("jsonを取得しました");
+			methods.constructBoardFrom(data);
+			document.info.rsh.value = data.Rsh
+			doMovePieceFromMoveCode(moveCode);
+			IsBoardInit =true;
+		}
+	}).then(function(){ 
+		refreshClickablePieceSetting();
+	});
+
+}
+
+
+function apiInitBoard(callback){
+	var methods = new apiMethods();
 	moveAllPieceInDock();
 	$.ajax({
 		url: API_RSH + "/" + document.info.rsh.value,
@@ -66,6 +89,7 @@ function apiGetRshCode(callback,currentRsh,Movecode){
 	fileurl = '/api/board';
 	if (currentRsh != "" && Movecode != "") {
 		fileurl = fileurl + '/' + currentRsh + '/' + Movecode;
+		console.log(fileurl);
 	}	
 	$.ajax({
 		url: fileurl,
@@ -87,7 +111,10 @@ var apiMethods = function(){}
 apiMethods.prototype.constructBoardFrom = function(data){
 		// 手番の取得
 		isBlackTurn = data.Turn;
-		debug("現在の手番" + isBlackTurn);
+		// console.log("↓取得json");
+		// console.log(data);
+
+		// debug("現在の手番" + isBlackTurn);
 		// data.boardから駒データ一覧を読み込み
 		for(objName in data.Pieces)
 		{

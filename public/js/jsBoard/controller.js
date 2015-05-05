@@ -121,14 +121,14 @@ function addMovable(toPos)
 			switch(res)
 			{
 				case true:
-					if(doMovePiece(toPos, pieceToMove, true))
+					if(doMovePiece(fromPos,toPos, pieceToMove, true))
 						refreshClickablePieceSetting();
 					break;
 				case "select":
 					ShowReservedView(fromPos, toPos, pieceToMove);
 					break;
 				case false:
-					if(doMovePiece(toPos, pieceToMove, false))
+					if(doMovePiece(fromPos,toPos, pieceToMove, false))
 						refreshClickablePieceSetting();
 					break;
 				case "error":
@@ -182,7 +182,7 @@ function ShowReservedView(fromPos, toPos, pieceToMove)
 		pieceToMove.removeClass("hidden");
 		targetPiece.removeClass("hidden");
 		ghost.addClass('hidden');
-		if(doMovePiece(toPos, pieceToMove, isPromotion)) //着手する
+		if(doMovePiece(fromPos,toPos, pieceToMove, isPromotion)) //着手する
 		{
 			debug("着手成功");
 			// 着手が成功した場合の処理

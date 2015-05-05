@@ -21,18 +21,19 @@
   <script src="/public/AdminLTE/js/AdminLTE/dashboard.js" type="text/javascript"></script>
   <script src="/public/AdminLTE/js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.js"></script>
 
-  <script src="public/js/jsBoard/api.js" type="text/javascript"></script>
-  <script src="public/js/jsBoard/bitBoard.js" type="text/javascript"></script>
-  <script src="public/js/jsBoard/controller.js" type="text/javascript"></script>
-  <script src="public/js/jsBoard/define.js" type="text/javascript"></script>
-  <script src="public/js/jsBoard/jsBoard.js" type="text/javascript"></script>
-  <script src="public/js/jsBoard/movable.js" type="text/javascript"></script>
-  <script src="public/js/jsBoard/move.js" type="text/javascript"></script>
-  <script src="public/js/jsBoard/pieceStates.js" type="text/javascript"></script>
-  <script src="public/js/jsBoard/triBoard.js" type="text/javascript"></script>
-  <script src="public/js/jsBoard/utility.js" type="text/javascript"></script>
-  <script src="public/js/panelMoveList.js" type="text/javascript"></script>
-  <script src="public/js/panelInfo.js" type="text/javascript"></script>
+  <script src="/public/js/jsBoard/api.js" type="text/javascript"></script>
+  <script src="/public/js/jsBoard/bitBoard.js" type="text/javascript"></script>
+  <script src="/public/js/jsBoard/controller.js" type="text/javascript"></script>
+  <script src="/public/js/jsBoard/define.js" type="text/javascript"></script>
+  <script src="/public/js/jsBoard/jsBoard.js" type="text/javascript"></script>
+  <script src="/public/js/jsBoard/movable.js" type="text/javascript"></script>
+  <script src="/public/js/jsBoard/move.js" type="text/javascript"></script>
+  <script src="/public/js/jsBoard/pieceStates.js" type="text/javascript"></script>
+  <script src="/public/js/jsBoard/triBoard.js" type="text/javascript"></script>
+  <script src="/public/js/jsBoard/utility.js" type="text/javascript"></script>
+  <script src="/public/js/panelMoveList.js" type="text/javascript"></script>
+  <script src="/public/js/panelInfo.js" type="text/javascript"></script>
+  {{set . "test" "helloworld"}}
 </head>
 <body class="skin-blue">
 
@@ -57,21 +58,29 @@
             <h3 class="box-title">棋譜</h3>
           </div>
           <div class="box-body">
-            {{template "Panel/PanelMoveList.html"}}
+            {{template "Panel/PanelMoveList.html" .}}
           </div><!-- /.box-body -->
         </div><!-- /.box -->
-            {{template "Panel/RshPanel.html"}}
+            {{template "Panel/RshPanel.html" .}}
       </div>
         <!-- Default box -->
         <div class="col-lg-7">
-        <div class="box">
-          <div class="box-header with-border">
-            <h3 class="box-title">局面</h3>
-          </div>
-          <div class="box-body">
-            {{template "jsBoard/jsBoard.html"}}
-          </div><!-- /.box-body -->
-        </div><!-- /.box -->
+          <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">局面</h3>
+            </div>
+            <div class="box-body">
+              {{template "jsBoard/jsBoard.html" .}}
+            </div><!-- /.box-body -->
+          </div><!-- /.box -->
+          <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">debug</h3>
+            </div>
+            <div class="box-body">
+              {{template "Panel/PanelDebug.html" .}}
+            </div><!-- /.box-body -->
+          </div><!-- /.box -->
         </div>
     </div>
   </section>

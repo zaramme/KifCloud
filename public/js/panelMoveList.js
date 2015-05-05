@@ -25,7 +25,7 @@ function setMove(data){
 			.attr({
 				"data-rshCurrent": data.Current,
 				"data-rshPrev": data.Prev,
-				"data-move": data.Move
+				"data-move": data.Move,
 			})
 	);
 }
@@ -39,17 +39,20 @@ function setMoveList(data){
 					.attr({
 						"data-rshCurrent": data[i].Current,
 						"data-rshPrev": data[i].Prev,
-						"data-move": data[i].Move
+						"data-move": data[i].Move,
+						"data-moveCode": data[i].MoveCode,
 					})
 				);
 	}
 }
 $("#PanelMoveList").children("select").change(function(){
 	var selected = $(this).children(":selected")
-	var rsh = selected.attr('data-rshCurrent');
-	debug("changed!..." + rsh);
+	var rsh = selected.attr('data-rshPrev');
+	var moveCode = selected.attr('data-moveCode');
 
-	apiReload(rsh);
+//	console.log(rsh);
+	apiReloadwithMoveCode(rsh,moveCode);
+
 })
 
 $("#PanelMoveList").ready(function(){

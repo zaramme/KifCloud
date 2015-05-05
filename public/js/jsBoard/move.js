@@ -8,14 +8,14 @@ $(function(){
 // publicメソッド(prefix:"move")
 
 // ゲーム上の「着手」として駒の移動処理を行う
-function doMovePiece(pos,PieceToMove,isPromoted){
+function doMovePiece(fromPos,toPos,PieceToMove,isPromoted){
+	//console.log(isBlackTurn+","+fromPos+"→"+toPos+","+isPromoted);
 	var methods = new moveMethods();
-	var fromPos = getPosFromPiece(PieceToMove);	// 移動前の座標を保持しておく
 	var kindToMove = getPieceCodeName(PieceToMove);
-	var PieceToCapture = getPieceObject(pos);
+	var PieceToCapture = getPieceObject(toPos);
 
 	// 駒を移動する
-	movePiece(pos, PieceToMove, isBlackTurn, isPromoted)
+	movePiece(toPos, PieceToMove, isBlackTurn, isPromoted)
 
 	if(PieceToCapture.length != 0)
 	{
@@ -37,19 +37,36 @@ function doMovePiece(pos,PieceToMove,isPromoted){
 		return false; //着手失敗
 	}
 
-	methods.FinishMove(fromPos,pos,kindToMove,isPromoted);
+	methods.FinishMove(fromPos,toPos,kindToMove,isPromoted);
 	return true; // 着手完了
 }
 
+function doMovePieceFromMoveCode(moveCode){
+	console.log("movecode = " + moveCode);
+	var args = moveCode.split(",");
+
+	var PieceToMove;
+	if (args[0] == "00") {
+ 	 PieceToMove = getCapturedPiece(isBlackTurn,args[2])
+	} else {
+     PieceToMove = getPieceObject(args[0]);
+ 	}
+
+ 	var isPromoted = (args[3] == "true");
+	doMovePiece(args[0],args[1],PieceToMove,isPromoted);
+}
+
 // プログラム上の処理として駒を移動させる
-function movePiece(toPos,PieceToMove,isBlack, isPromoted){
+function movePiece(toPos,PieceToMove,isBlack,isPromoted){
 	var methods = new moveMethods();
 
 	// 必要なオブジェクトを取得
 	var fromPos = getPosFromPiece(PieceToMove);
+	console.log("frompos  = " + fromPos);
 	var MoveToArea = getAreaObject(toPos);
 	var CapturePiece = MoveToArea.children(".piece");
 
+	//console.log("@movePiece isPoromoted = " + isPromoted);
 	// 共通処理
 	PieceToMove.prependTo(MoveToArea).css({top:'0',left:'0'});
 	methods.appendPieceClasses(PieceToMove,isBlack, isPromoted);
@@ -252,6 +269,7 @@ moveMethods.prototype.appendPieceClasses
 
 // 画像を変更する
 moveMethods.prototype.appendImage = function(pieceObj, kindOfPiece, isBlack, isPromoted){
+
 	imgID = this.createImageID(kindOfPiece,isBlack, isPromoted);
 	pieceObj.children("img").attr("src",IMG_DIR+"/"+imgID+".png");
 }
@@ -264,7 +282,7 @@ moveMethods.prototype.addPieceCountText = function(target,length){
 }
 
 // 画像IDを生成する
-moveMethods.prototype.createImageID = function (kindOfPiece,isReversed, isPromoted){
+moveMethods.prototype.createImageID = function (kindOfPiece,isReversed,isPromoted){
 	var imgID = new String();
 	switch(kindOfPiece){
 		case PieceImageCode.OH:

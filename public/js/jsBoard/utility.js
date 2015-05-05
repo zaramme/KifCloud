@@ -12,9 +12,9 @@ function debug(message)
 {
 	if(IsDebugMode && $(".debugend").get(0)){
 		$(".debugend").removeClass("debugend");
+	}
 		$("#debug").append("<div class=\"debugend\">" +message + "</div>");
 		$("#debug").scrollTop($(".debugend").offset().top);
-	}
 }
 
 function selectAreaID(posID){
@@ -73,6 +73,9 @@ function getCapturedPieces(IsBlack){
 		return $(".captured").children(".piece");
 	else
 		return $(IsBlack ? "#pos_bc" : "#pos_wc").children(".piece");
+}
+function getCapturedPiece(isBlack, kop) {
+	return $(isBlack ? "#pos_bc" : "#pos_wc").children("."+kop);
 }
 
 function getAreaObject(posID){

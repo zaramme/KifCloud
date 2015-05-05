@@ -22,6 +22,7 @@ func (c Kifu) GetKifu(kifuID string) revel.Result {
 		output[i]["Move"] = route.Move.ToMoveCode()
 		output[i]["MoveText"] = route.Move.ToJpnCode()
 		output[i]["Current"] = route.Current
+		output[i]["MoveCode"] = route.Move.ToJsCode()
 	}
 	return c.RenderJson(output)
 }
