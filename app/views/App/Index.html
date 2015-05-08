@@ -63,7 +63,7 @@
             {{template "Panel/RshPanel.html" .}}
       </div>
         <!-- Default box -->
-        <div class="col-lg-7">
+        <div class="col-lg-6">
           <div class="box">
             <div class="box-header with-border">
               <h3 class="box-title">局面</h3>
@@ -72,15 +72,18 @@
               {{template "jsBoard/jsBoard.html" .}}
             </div><!-- /.box-body -->
           </div><!-- /.box -->
-          <div class="box">
+          <!-- /.box -->
+        </div>
+    <div class="col-lg-3">
+      <div class="box">
             <div class="box-header with-border">
               <h3 class="box-title">debug</h3>
             </div>
             <div class="box-body">
               {{template "Panel/PanelDebug.html" .}}
             </div><!-- /.box-body -->
-          </div><!-- /.box -->
-        </div>
+          </div>
+    </div>
     </div>
   </section>
 
