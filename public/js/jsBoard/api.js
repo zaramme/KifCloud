@@ -70,12 +70,29 @@ function apiReloadwithMoveCode(rsh, moveCode){
 function apiInitBoard(callback){
 	var methods = new apiMethods();
 	moveAllPieceInDock();
+
+	var url = API_RSH + "/"
+	var movecCode = false;
+	if(document.info.rsh.value){
+		console.log("【最終手なし");
+		url += document.info.rsh.value;
+	} else if ( document.info.rshPrev.value && document.info.currentMove.value) {
+				console.log("最終手あり");
+		url += document.info.rshPrev.value;
+		moveCode = document.info.currentMove.value
+	}
+
+	console.log("API = " + url);
 	$.ajax({
-		url: API_RSH + "/" + document.info.rsh.value,
+		url: url,
 		dataType: 'json',
 		success: function(data){
 			debug("jsonを取得しました");
 			methods.constructBoardFrom(data);
+			movecode = data.Info.LastMove
+			if (moveCode) {
+				doMovePieceFromMoveCode(moveCode);
+			}
 			document.info.rsh.value = data.Rsh
 			IsBoardInit =true;
 		}
