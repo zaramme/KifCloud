@@ -5,7 +5,6 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <!-- css styles -->
-  <link rel="stylesheet" href="/public/js/jsBoard/shogi.css" type="text/css" />
   <link rel="stylesheet" href="/public/css/index.css" type="text/css" />
   <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
   <link href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet" type="text/css" />
@@ -13,27 +12,14 @@
   <link href="/public/Bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href='http://fonts.googleapis.com/css?family=Abel|Hammersmith+One|Jura:400,600|Montserrat:400,700|NTR' rel='stylesheet' type='text/css'>
 
-  <!-- <script src="/public/js/jquery/jquery-1.11.1.js"></script>
-  <script src="/public/js/jquery-ui/jquery-ui.min.js"></script>-->
+  <script src="/public/js/jquery-ui/jquery-ui.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
   <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js" type="text/javascript"></script>
   <script src="/public/Bootstrap/js/bootstrap.min.js"></script>
   <script src="/public/AdminLTE/js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.js"></script>
   <script src="/public/AdminLTE/js/AdminLTE/app.js" type="text/javascript"></script>
 
-  <script src="/public/js/jsBoard/api.js" type="text/javascript"></script>
-  <script src="/public/js/jsBoard/bitBoard.js" type="text/javascript"></script>
-  <script src="/public/js/jsBoard/controller.js" type="text/javascript"></script>
-  <script src="/public/js/jsBoard/define.js" type="text/javascript"></script>
-  <script src="/public/js/jsBoard/jsBoard.js" type="text/javascript"></script>
-  <script src="/public/js/jsBoard/movable.js" type="text/javascript"></script>
-  <script src="/public/js/jsBoard/move.js" type="text/javascript"></script>
-  <script src="/public/js/jsBoard/pieceStates.js" type="text/javascript"></script>
-  <script src="/public/js/jsBoard/triBoard.js" type="text/javascript"></script>
-  <script src="/public/js/jsBoard/utility.js" type="text/javascript"></script>
-  <script src="/public/js/panelMoveList.js" type="text/javascript"></script>
-  <script src="/public/js/panelInfo.js" type="text/javascript"></script>
-  {{set . "test" "helloworld"}}
+  {{template "jsBoard/imports.html" .}}
 </head>
 <body class="skin-blue">
 
@@ -44,7 +30,6 @@
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top" role="navigation">
-
      </nav>            
   </header>
 

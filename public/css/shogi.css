@@ -1,8 +1,12 @@
 @charset "utf-8"; /*utf-8の場合*/
 
-h1{
-	font-size: 20px;
-	font-weight: bold;
+#jsBoard {
+	margin-left: 10px;
+	width: 660px;
+	height:540px;
+	float:left;
+	padding:5px;
+	border: solid 1px #cccccc;
 }
 
 .board{

@@ -1,13 +1,5 @@
 @charset "utf-8"; /*utf-8の場合*/
 
-#jsBoard {
-	margin-left: 10px;
-	width: 660px;
-	height:540px;
-	float:left;
-	padding:5px;
-	border: solid 1px #cccccc;
-}
 
 #debug{
 	border: 1px solid #999999;
