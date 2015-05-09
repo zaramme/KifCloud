@@ -51,3 +51,16 @@ func (c Kifu) Upload(file *os.File) revel.Result {
 
 	return nil
 }
+
+func (c Kifu) GetKifuCount() revel.Result {
+	count, err := kifu.GetKifuCount()
+
+	if err != nil {
+		revel.INFO.Print("アップロード済み寄付総数の取得に失敗しました")
+		return nil
+	}
+
+	output := make(map[string]int)
+	output["count"] = count
+	return c.RenderJson(output)
+}

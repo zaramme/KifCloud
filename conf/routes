@@ -20,6 +20,7 @@ GET   	/api/board/:code/:move	Board.getBoardWithMove
 GET 	/api/description/:code  Panel.GetDescription
 PUT		/api/description/:code  Panel.PutDescription
 GET 	/api/rsh/				Board.Init
+GET 	/api/kifu/count/		Kifu.GetKifuCount
 GET 	/api/kifu/:kifuID				Kifu.GetKifu
 POST    /api/kifupload          Kifu.Upload
 
