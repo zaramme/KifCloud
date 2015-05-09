@@ -89,9 +89,8 @@ function apiInitBoard(callback){
 		success: function(data){
 			debug("jsonを取得しました");
 			methods.constructBoardFrom(data);
-			movecode = data.Info.LastMove
-			if (moveCode) {
-				doMovePieceFromMoveCode(moveCode);
+			if (data.Info.LastMove){
+				doMovePieceFromMoveCode(data.Info.LastMove);
 			}
 			document.info.rsh.value = data.Rsh
 			IsBoardInit =true;
