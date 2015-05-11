@@ -20,9 +20,10 @@ GET   	/api/board/:code/:move	Board.getBoardWithMove
 GET 	/api/description/:code  Panel.GetDescription
 PUT		/api/description/:code  Panel.PutDescription
 GET 	/api/rsh/				Board.Init
+POST    /api/kifu/         		Kifu.Upload
 GET 	/api/kifu/count/		Kifu.GetKifuCount
-GET 	/api/kifu/:kifuID				Kifu.GetKifu
-POST    /api/kifupload          Kifu.Upload
+GET     /api/kifu/info/userID/:userID	Kifu.GetKifuInfoList
+GET 	/api/kifu/:kifuID		Kifu.GetKifu
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

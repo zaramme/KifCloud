@@ -29,17 +29,17 @@ func (c Kifu) GetKifu(kifuID string) revel.Result {
 
 func (c Kifu) Upload(file *os.File) revel.Result {
 
-	kif, err := loader.LoadKifFileCont(file)
-	if err != nil {
+	kif, err := loader.LoadKifFile(file)
+	if err != nil || kif == nil {
 		revel.INFO.Print("棋譜の読み込みに失敗しました")
-		return nil
+		return c.RenderError(err)
 	}
 
 	_, err = kifu.PutKifu(kif, "uploader")
 
 	if err != nil {
 		revel.INFO.Print("棋譜のアップロードに失敗しました")
-		return nil
+		return c.RenderError(err)
 	}
 
 	revel.INFO.Print("棋譜のアップロードに成功しました")
@@ -63,4 +63,14 @@ func (c Kifu) GetKifuCount() revel.Result {
 	output := make(map[string]int)
 	output["count"] = count
 	return c.RenderJson(output)
+}
+
+func (c Kifu) GetKifuInfoList(userID string) revel.Result {
+	kifuInfoList, err := kifu.GetKifuListByUser(userID)
+
+	if err != nil || kifuInfoList == nil {
+		revel.INFO.Print("棋譜リストの取得に失敗しました")
+		return nil
+	}
+	return c.RenderJson(kifuInfoList)
 }
