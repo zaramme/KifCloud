@@ -26,6 +26,13 @@ func (_ tApp) Submit(
 	return revel.MainRouter.Reverse("App.Submit", args).Url
 }
 
+func (_ tApp) About(
+		) string {
+	args := make(map[string]string)
+	
+	return revel.MainRouter.Reverse("App.About", args).Url
+}
+
 
 type tAuth struct {}
 var Auth tAuth
@@ -107,6 +114,22 @@ func (_ tKifu) Upload(
 	
 	revel.Unbind(args, "file", file)
 	return revel.MainRouter.Reverse("Kifu.Upload", args).Url
+}
+
+func (_ tKifu) GetKifuCount(
+		) string {
+	args := make(map[string]string)
+	
+	return revel.MainRouter.Reverse("Kifu.GetKifuCount", args).Url
+}
+
+func (_ tKifu) GetKifuInfoList(
+		userID string,
+		) string {
+	args := make(map[string]string)
+	
+	revel.Unbind(args, "userID", userID)
+	return revel.MainRouter.Reverse("Kifu.GetKifuInfoList", args).Url
 }
 
 

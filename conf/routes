@@ -10,6 +10,7 @@ GET 	/board/:code			App.Index
 GET 	/board/:code/:move      App.Index
 
 GET     /uploader				App.Submit
+GET 	/about					App.About
 
 GET 	/login					Auth.Login
 GET 	/token 					Auth.GetToken
