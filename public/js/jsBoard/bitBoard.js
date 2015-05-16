@@ -4,7 +4,6 @@ debug("bitBoard.jsを読み込みました");
 
 });
 
-
 function bitBoard(){
 	var init = {};
 	for (var i = 11; i < 100; i++){

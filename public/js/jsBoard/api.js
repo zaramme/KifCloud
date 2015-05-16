@@ -11,7 +11,6 @@ function apiLoadBoard(callback,filename){
 	debug("盤面の読み込みが完了しました")
 
 	var fileurl = './json/' + filename;
-
 	$.ajax({
 		url: fileurl,
 		dataType: 'json',
@@ -65,7 +64,6 @@ function apiReloadwithMoveCode(rsh, moveCode){
 	});
 
 }
-
 
 function apiInitBoard(callback){
 	var methods = new apiMethods();

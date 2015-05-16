@@ -7,15 +7,7 @@ $("#bgboard").attr("src",IMG_DIR+"/japanese-chess-b02.png");
 
 apiInitBoard(refreshClickablePieceSetting);
 
-$("#button1").click(function(){
-	moveAllPieceInDock()
 });
-
-$("#button2").click(function(){apiInitBoard(refreshClickablePieceSetting)});
-
-$("#button3").click(function(){apiLoadBoard(refreshClickablePieceSetting,"test1.json")});
-});
-
 
 // パネル更新イベントの発生
 function panelReloadTrigger(){
@@ -66,8 +58,7 @@ function addDraggable(obj, pos){
 }
 
 // 駒をクリックしたときの処理
-function clickPiece(pos, obj)
-{
+function clickPiece(pos, obj) {
 	if(isReserving)
 		return;
 
@@ -86,12 +77,12 @@ function clickPiece(pos, obj)
 
 	if(pos=="bc" || pos =="wc")
 	{
-//		debug("駒台の駒をクリックしました = "+ pcClicked.kindOfPiece + ", " +pcClicked.isBlack + ", " + pcClicked.isPromoted);
+		//debug("駒台の駒をクリックしました = "+ pcClicked.kindOfPiece + ", " +pcClicked.isBlack + ", " + pcClicked.isPromoted);
 		CapturedPieces = clickedArea.children("."+pcClicked.kindOfPiece);
 
 		if(CapturedPieces.length > 1)
 		{
-//			debug("ゴーストを表示します");
+			//debug("ゴーストを表示します");
 			ghost = $("#ghost");
 			ghost.removeClass('hidden');
 			var ghostPos = obj.offset();
@@ -101,8 +92,7 @@ function clickPiece(pos, obj)
 	}
 }
 
-function addMovable(toPos)
-{
+function addMovable(toPos) {
 	var CurrentArea = getAreaObject(toPos);
 	CurrentArea.addClass("movable");
 
@@ -141,8 +131,7 @@ function addMovable(toPos)
 
 // 駒成り選択画面の表示
 // この画面が表示されている場合は処理をストップする
-function ShowReservedView(fromPos, toPos, pieceToMove)
-{
+function ShowReservedView(fromPos, toPos, pieceToMove) {
 	debug("成りセレクトを表示しています");
 	Methods = new moveMethods();
 	pcPiectToMove = new pieceConductor(pieceToMove);
@@ -199,7 +188,6 @@ function ShowReservedView(fromPos, toPos, pieceToMove)
 	});
 }
 
-
 // 駒のドラッグの終了処理
 function endClickPiece(pos){
 	clickedArea = getAreaObject(pos);
@@ -215,33 +203,4 @@ function endClickPiece(pos){
 		$(".virtual").removeClass('virtual');
 	}
 }
-/*
 
-// // ティッカーウィンドウを表示する
-// function showTicker($content){
-// 	// セレクトボックスの可視化とクリック属性の指定
-// 	$("#selectbox").css("visibility", "visible");
-
-// 	// アニメーションで消える
-// }
-
-// // 一時的に盤面の入力保留を行う。キーには保留する内容を入れる
-// function setBoardReserved($key)
-// {
-// 	//ResevingCount++;
-
-// //	if(Reseving.length > 0)
-// //		isReserving = true;
-// }
-
-// // 特定のキーの盤面の入力保留を解除する
-// function unsetBoardReserved()e
-// {
-// 	//ResevingCount--;
-
-// //	if(Reseving.length > 9)
-// //		isReserving = false;
-// }
-
-
-*/
