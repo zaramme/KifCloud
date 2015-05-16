@@ -11,8 +11,7 @@
 
   {{template "Common/CommonStyles.html" .}}
   {{template "jsBoard/imports.html" .}}
-
-  <script src="/public/js/panelMoveList.js" type="text/javascript"></script>
+  {{template "jsKifu/imports.html" .}}  
   <script src="/public/js/panelInfo.js" type="text/javascript"></script>
   <script src="/public/js/panelKifuCount.js" type="text/javascript"></script>
 
@@ -37,7 +36,7 @@
       <div class="col-lg-9 col-md-12">
       <div class="row">
         <div class="col-lg-2 col-md-2 col-sm-3">
-          {{template "Panel/PanelMoveList.html" .}}
+          {{template "jsKifu/jsKifu_root.html" .}}
        </div>
         <div class="col-lg-10 col-md-9 col-sm-12">
           {{template "jsBoard/jsBoard.html" .}}

@@ -1,20 +1,6 @@
 $(function(){
-debug("panelMoveList.jsを読み込みました");
-
-function apiLoadKifu(){
-	kifuID = 88888;
-	fileurl = '/api/kifu/' + kifuID;
-	debug("api通信：api.kifu param ... " + kifuID);
-
-	$.ajax({
-		url: fileurl,
-		dataType: 'json',
-		success: function(data){
-				debug("--棋譜が読み込まれました");
-				setMoveList(data);
-		},
-	});
-}
+debug("jsKifu/controller.jsを読み込みました");
+});
 
 function setMove(data){
 	debug("局面をセットしています");
@@ -29,6 +15,7 @@ function setMove(data){
 			})
 	);
 }
+
 function setMoveList(data){
 		debug("--棋譜をセットしています");
 	for (var i = 0, len = data.length; i < len; i++){
@@ -59,6 +46,4 @@ $("#PanelMoveList").ready(function(){
 	debug("panelmovelist読み込みを実行します");
 	apiLoadKifu();
 })
-
-});
 
