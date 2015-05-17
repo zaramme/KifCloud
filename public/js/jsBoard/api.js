@@ -5,22 +5,18 @@ $(function(){
 	debug("api.jsを読み込みました");
 	});
 
-function apiLoadBoard(callback,filename){
-	var methods = new apiMethods();
-	moveAllPieceInDock();
-	debug("盤面の読み込みが完了しました")
-
-	var fileurl = './json/' + filename;
+function apiGetBoardState(rsh,callback){
+	var url = API_RSH + "/" + (rsh===null ? "" : rsh) + (lastMove==null ? "" : "/" + lastMove );
 	$.ajax({
-		url: fileurl,
-		dataType: 'json',
-		success: function(data){
-					debug("jsonを取得しました");
-					methods.constructBoardFrom(data);
-		},
-		error: function(){debug("jsonファイルの読み込みに失敗しました filename = ." + fileurl);}
-
-	}).then(function(){ callback("loaded");});
+		url: url,
+		dataType: 'json'
+	})
+	.done(function(boardState) {
+		callback(boardState);
+	})
+	.fail(function() {
+		console.log("apiロードに失敗しました。resource= " + rsh );
+	});
 }
 
 function apiReload(rsh){

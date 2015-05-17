@@ -2,13 +2,25 @@
 
 $(function(){
 
-$(".board").css('background','url(\''+IMG_DIR+'/japanese-chess-b02.png\')')
-$("#bgboard").attr("src",IMG_DIR+"/japanese-chess-b02.png");
-
-apiInitBoard(refreshClickablePieceSetting);
+main();
 
 });
 
+function main(){
+	$(".board").css('background','url(\''+IMG_DIR+'/japanese-chess-b02.png\')')
+	$("#bgboard").attr("src",IMG_DIR+"/japanese-chess-b02.png");
+
+	initBoard();
+}
+function initBoard(){
+	var methods = new ctrMethods();
+	apiGetBoardState(null,null,function(boardState){
+		// 盤面の設定
+		methods.constructBoardFromBoardState(boardState);
+		methods.setInfo(boardState.Info)
+		panelReloadTrigger();
+	});
+}
 // パネル更新イベントの発生
 function panelReloadTrigger(){
 	debug("パネル更新トリガーが呼び出されました");
@@ -204,3 +216,42 @@ function endClickPiece(pos){
 	}
 }
 
+var ctrMethods = function(){};
+
+ctrMethods.prototype.constructBoardFromBoardState = function(boardState) {
+		// 手番の取得
+		isBlackTurn = boardState.Turn;
+
+		// data.boardから駒データ一覧を読み込み
+		for(objName in boardState.Pieces)
+		{
+			// 駒データの取得
+			var obj = boardState.Pieces[objName];
+			var posID = obj["Pos"];
+			var kindOfPiece = obj["Kop"];
+			var isBlack = obj["Ply"];
+			var isPromoted = obj["IsPrm"];
+
+			// 持ち駒の場合の処理
+			if (posID == 0 && isBlack) {	
+				debug("持ち駒を配置します。")				
+				posID = "bc";
+			} else if (posID == 0 && !isBlack){
+				debug("持ち駒を配置します。（後手）")
+				posID = "wc";
+			}
+			 
+			movePieceFromDock(posID,kindOfPiece,isBlack,isPromoted);
+		}
+
+		sortCapturedArea();
+		debug("盤面読み込みが終了しました")
+		IsBoardInit =true;
+		refreshClickablePieceSetting();
+};
+
+ctrMethods.prototype.setInfo = function(boardInfo){
+	document.info.rsh = boardInfo.RshCurrent;
+	document.info.rshPrev = boardInfo.RshPrev;
+	document.info.currentMove  = boardInfo.LastMove;
+}
