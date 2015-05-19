@@ -7,19 +7,42 @@ main();
 });
 
 function main(){
+	var methods = new ctrMethods()
 	$(".board").css('background','url(\''+IMG_DIR+'/japanese-chess-b02.png\')')
 	$("#bgboard").attr("src",IMG_DIR+"/japanese-chess-b02.png");
+
+	$("#jsBoard").on("setBoard", function(ev,data){
+		apiGetBoardState(data["rsh"],null, function(boardState){
+			moveAllPieceInDock();
+			methods.constructBoardFromBoardState(boardState);
+			doMovePieceFromMoveCode(data["moveCode"]);			
+			panelReloadTrigger();			
+		});
+	});
 
 	initBoard();
 }
 function initBoard(){
 	var methods = new ctrMethods();
-	apiGetBoardState(null,null,function(boardState){
-		// 盤面の設定
-		methods.constructBoardFromBoardState(boardState);
-		methods.setInfo(boardState.Info)
-		panelReloadTrigger();
-	});
+	if ( document.info.rshPrev.value && document.info.currentMove.value) {
+		//最終手が指定されている場合は、rshPrevを読み込んで最終手を着手
+		apiGetBoardState(document.info.rshPrev.value, null, function(boardState){
+			methods.constructBoardFromBoardState(boardState);
+			doMovePieceFromMoveCode(document.info.currentMove.value);
+			panelReloadTrigger()
+		});
+	} else {
+		//最終手が指定されていない場合は、rshCurrentを読み込み
+		apiGetBoardState(document.info.rsh.value,null,function(boardState){
+			// 盤面の設定
+			methods.constructBoardFromBoardState(boardState);
+			if (!document.info.rsh.value) {
+				// 初手の場合はRSHが設定されていないので取得
+				methods.setInfo(boardState.Info);
+			}
+			panelReloadTrigger();
+		});
+	}
 }
 // パネル更新イベントの発生
 function panelReloadTrigger(){
@@ -105,6 +128,7 @@ function clickPiece(pos, obj) {
 }
 
 function addMovable(toPos) {
+	var methods = new ctrMethods();
 	var CurrentArea = getAreaObject(toPos);
 	CurrentArea.addClass("movable");
 
@@ -123,15 +147,24 @@ function addMovable(toPos) {
 			switch(res)
 			{
 				case true:
-					if(doMovePiece(fromPos,toPos, pieceToMove, true))
+					if(doMovePiece(fromPos,toPos, pieceToMove, true)){
+						var boardInfo = apiGetBoardInfo(document.info.rsh.value, moveCode,function(boardInfo){
+							methods.setInfo(boardInfo);
+						});
 						refreshClickablePieceSetting();
+					}
 					break;
 				case "select":
 					ShowReservedView(fromPos, toPos, pieceToMove);
 					break;
 				case false:
-					if(doMovePiece(fromPos,toPos, pieceToMove, false))
+					if(doMovePiece(fromPos,toPos, pieceToMove, false)){
+						var boardInfo =apiGetBoardInfo(document.info.rsh.value, moveCode,function(boardInfo){
+							console.log(boardInfo);
+							methods.setInfo(boardInfo);
+						});
 						refreshClickablePieceSetting();
+					}
 					break;
 				case "error":
 					debug("エラーが発生しました");
@@ -140,6 +173,8 @@ function addMovable(toPos) {
 		}
 	});
 }
+
+
 
 // 駒成り選択画面の表示
 // この画面が表示されている場合は処理をストップする
@@ -251,7 +286,8 @@ ctrMethods.prototype.constructBoardFromBoardState = function(boardState) {
 };
 
 ctrMethods.prototype.setInfo = function(boardInfo){
-	document.info.rsh = boardInfo.RshCurrent;
-	document.info.rshPrev = boardInfo.RshPrev;
-	document.info.currentMove  = boardInfo.LastMove;
+	document.info.rsh.value = boardInfo.RshCurrent;
+	document.info.rshPrev.value = boardInfo.RshPrev;
+	document.info.currentMove.value  = boardInfo.LastMove;
+	panelReloadTrigger();
 }

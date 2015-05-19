@@ -37,12 +37,12 @@ function doMovePiece(fromPos,toPos,PieceToMove,isPromoted){
 		return false; //着手失敗
 	}
 
-	methods.FinishMove(fromPos,toPos,kindToMove,isPromoted);
+	methods.FinishMove(fromPos,toPos,kindToMove,isPromoted);		
 	return true; // 着手完了
-}
+	};
+
 
 function doMovePieceFromMoveCode(moveCode){
-	console.log("movecode = " + moveCode);
 	var args = moveCode.split(",");
 
 	var PieceToMove;
@@ -62,7 +62,6 @@ function movePiece(toPos,PieceToMove,isBlack,isPromoted){
 
 	// 必要なオブジェクトを取得
 	var fromPos = getPosFromPiece(PieceToMove);
-	console.log("frompos  = " + fromPos);
 	var MoveToArea = getAreaObject(toPos);
 	var CapturePiece = MoveToArea.children(".piece");
 
@@ -328,16 +327,6 @@ moveMethods.prototype.FinishMove = function(fromPos,toPos,kindOfPiece,isPromoted
 	sortCapturedArea();
 
 	debug("着手を完了しました。移動コード…"+moveCode);
-
-	apiGetRshCode(function(){return},document.info.rsh.value, moveCode);
-
-	if(isBlackTurn)
-		debug("先手の手番です");
-	else
-		debug("後手の手番です");
-	if(isOhte)
-		debug("王手がかかっています");
-
 }
 
 moveMethods.prototype.getMovecode = function(fromPos,toPos,kindOfPiece,isPromoted)
