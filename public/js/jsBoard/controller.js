@@ -14,26 +14,11 @@ function main(){
 
 	// 初期盤面の追加
 	$("#jsBoard").on("setBoard", function(ev,data){
-		apiGetBoardState(data["rsh"],null, function(boardState){
-			moveAllPieceInDock();
-			methods.constructBoardFromBoardState(boardState);
-			if ( data["LastJsCode"] != null && data["LastMoveCode"] != null){
-				doMovePieceFromMoveCode(data["LastJsCode"]);			
-				refreshClickablePieceSetting();
-				apiGetBoardInfo(data["rsh"],data["LastMoveCode"],function(boardData){
-					console.log("最終着手付き");
-					console.log(boardData);
-					methods.setInfo(boardData);
-					panelReloadTrigger();					
-				});
-			} else {
-			methods.setInfo(boardState.Info);
-			panelReloadTrigger();
-			}
-		});
+		setBoardWithData(data["rsh"],data["LastJsCode"],data["LastMoveCode"]);
 	});
 
 	initBoard();
+	apiLoadKifu(22);
 }
 function initBoard(){
 	var methods = new ctrMethods();
@@ -66,6 +51,29 @@ function initBoard(){
 		});
 	}
 }
+
+
+function setBoardWithData(rsh,lastJsCode,lastMoveCode){
+	var methods = new ctrMethods();
+	apiGetBoardState(rsh, null, function(boardState){
+		moveAllPieceInDock();
+			methods.constructBoardFromBoardState(boardState);
+			if ( lastJsCode != null && lastMoveCode != null){
+				doMovePieceFromMoveCode(lastJsCode);			
+				refreshClickablePieceSetting();
+				apiGetBoardInfo(rsh,lastMoveCode,function(boardData){
+					console.log("最終着手付き");
+					console.log(boardData);
+					methods.setInfo(boardData);
+					panelReloadTrigger();					
+				});
+			} else {
+			methods.setInfo(boardState.Info);
+			panelReloadTrigger();
+			}
+		});
+}
+
 // パネル更新イベントの発生
 function panelReloadTrigger(){
 	debug("パネル更新トリガーが呼び出されました");
