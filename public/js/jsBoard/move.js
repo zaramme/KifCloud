@@ -47,7 +47,7 @@ function doMovePieceFromMoveCode(moveCode){
 
 	var PieceToMove;
 	if (args[0] == "00") {
- 	 PieceToMove = getCapturedPiece(isBlackTurn,args[2])
+ 	 PieceToMove = getCapturedPieceFirst(isBlackTurn,args[2])
 	} else {
      PieceToMove = getPieceObject(args[0]);
  	}

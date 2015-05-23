@@ -74,8 +74,8 @@ function getCapturedPieces(IsBlack){
 	else
 		return $(IsBlack ? "#pos_bc" : "#pos_wc").children(".piece");
 }
-function getCapturedPiece(isBlack, kop) {
-	return $(isBlack ? "#pos_bc" : "#pos_wc").children("."+kop);
+function getCapturedPieceFirst(isBlack, kop) {
+	return $(isBlack ? "#pos_bc" : "#pos_wc").children("."+kop).first();
 }
 
 function getAreaObject(posID){
