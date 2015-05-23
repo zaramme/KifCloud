@@ -3,8 +3,10 @@ package controllers
 import (
 	kifu "KifCloud-Mapper/kifu"
 	loader "KifuLibrary-Logic/kifLoader"
+	r "KifuLibrary-Logic/routes"
 	"github.com/robfig/revel"
 	"os"
+	"strings"
 )
 
 type Kifu struct {
@@ -13,6 +15,36 @@ type Kifu struct {
 
 func (c Kifu) GetKifu(kifuID string) revel.Result {
 	routes := kifu.GetKifu(kifuID)
+
+	output := make([]map[string]string, len(routes))
+
+	for i, route := range routes {
+		output[i] = make(map[string]string)
+		output[i]["RshPrev"] = route.Prev
+		output[i]["RshCurrent"] = route.Current
+		output[i]["LastMoveCode"] = route.Move.ToMoveCode()
+		output[i]["LastJsCode"] = route.Move.ToJsCode()
+		output[i]["MoveText"] = route.Move.ToJpnCode()
+	}
+	return c.RenderJson(output)
+}
+
+func (c Kifu) LoadText(kifText string) revel.Result {
+
+	// 改行コードで変換
+	slist := strings.SplitN(kifText, "\r\n", -1)
+
+	// kifクラスに変換
+	kif, err := loader.LoadStringList(slist)
+	if err != nil {
+		return c.RenderError(err)
+	}
+
+	// routesクラスに変換
+	routes, err := r.NewRoutesFromKifuFile(kif)
+	if err != nil {
+		return c.RenderError(err)
+	}
 
 	output := make([]map[string]string, len(routes))
 

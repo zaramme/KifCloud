@@ -10,6 +10,8 @@ GET 	/board/:code			App.Index
 GET 	/board/:code/:move      App.Index
 
 GET     /uploader				App.Submit
+GET 	/textloader				Utils.TextLoader
+
 GET 	/about					App.About
 
 GET 	/login					Auth.Login
@@ -21,7 +23,7 @@ GET   	/api/board/:code/:move	Board.getBoardWithMove
 GET 	/api/description/:code  Panel.GetDescription
 PUT		/api/description/:code  Panel.PutDescription
 GET 	/api/rsh/				Board.Init
-POST    /api/kifu/         		Kifu.Upload
+POST	/api/kifu/directTextLoader		Kifu.LoadText
 GET 	/api/kifu/count/		Kifu.GetKifuCount
 GET     /api/kifu/info/userID/:userID	Kifu.GetKifuInfoList
 GET 	/api/kifu/:kifuID		Kifu.GetKifu
