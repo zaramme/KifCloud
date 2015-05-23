@@ -18,11 +18,11 @@ func (c Kifu) GetKifu(kifuID string) revel.Result {
 
 	for i, route := range routes {
 		output[i] = make(map[string]string)
-		output[i]["Prev"] = route.Prev
-		output[i]["Move"] = route.Move.ToMoveCode()
+		output[i]["RshPrev"] = route.Prev
+		output[i]["RshCurrent"] = route.Current
+		output[i]["LastMoveCode"] = route.Move.ToMoveCode()
+		output[i]["LastJsCode"] = route.Move.ToJsCode()
 		output[i]["MoveText"] = route.Move.ToJpnCode()
-		output[i]["Current"] = route.Current
-		output[i]["MoveCode"] = route.Move.ToJsCode()
 	}
 	return c.RenderJson(output)
 }

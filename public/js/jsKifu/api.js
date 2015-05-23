@@ -2,8 +2,7 @@ $(function(){
 debug("jsKifu/api.jsを読み込みました");
 });
 
-function apiLoadKifu(){
-	kifuID = 88888;
+function apiLoadKifu(kifuID){
 	fileurl = '/api/kifu/' + kifuID;
 	debug("api通信：api.kifu param ... " + kifuID);
 

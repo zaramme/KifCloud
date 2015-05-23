@@ -67,8 +67,8 @@ function setMoveList(data){
 				$('<option>')
 					.html(data[i].MoveText)
 					.attr({
-						"data-RshCurrent": data[i].Current,
-						"data-RshPrev": data[i].Prev,
+						"data-RshCurrent": data[i].RshCurrent,
+						"data-RshPrev": data[i].RshPrev,
 						"data-LastMoveCode": data[i].LastMoveCode,
 						"data-LastJsCode": data[i].LastJsCode,
 					})
