@@ -9,6 +9,11 @@ $(function(){
 	$("#PanelMoveList").on("pushKifuNode", function(ev,data){
 		pushKifuNode(data)
 	});
+	$("#PanelMoveList").on("loadKifuWithJson", function(ev,data){
+		console.log("jsKifuが呼び出されました：loadKifuWithJson")
+		console.log(data);
+		setKifuWithJson(data);
+	});
 	$("#PanelMoveList").children("select").change(function(){
 		var selected = $(this).children(":selected")
 		if (selected.attr('data-LastJsCode') == undefined || selected.attr('data-LastMoveCode') == undefined){
@@ -29,6 +34,32 @@ $(function(){
 	});
 
 });
+
+function clearKifu(){
+	var listBox = $("#PanelMoveList").children("select");
+	var nodes = listBox.children();
+	nodes.remove();
+}
+
+function setKifuWithJson(data){
+	clearKifu();
+	console.log("--棋譜をセットしています");
+	console.log(data);
+	data = data.json;
+	for (var i = 0, len = data.length; i < len; i++){
+			$("#PanelMoveList").children("select")
+			.append(
+				$('<option>')
+					.html(data[i].MoveText)
+					.attr({
+						"data-RshCurrent": data[i].RshCurrent,
+						"data-RshPrev": data[i].RshPrev,
+						"data-LastMoveCode": data[i].LastMoveCode,
+						"data-LastJsCode": data[i].LastJsCode,
+					})
+				);
+	}	
+}
 
 function pushKifuNode(data){
 	debug("局面をセットしています");
