@@ -1,19 +1,62 @@
 $(function(){
-debug("jsKifu/controller.jsを読み込みました");
+	debug("jsKifu/controller.jsを読み込みました");
+
+	$("#PanelMoveList").ready(function(){
+		// debug("panelmovelist読み込みを実行します");
+//		 apiLoadKifu();
+	});
+
+	$("#PanelMoveList").on("pushKifuNode", function(ev,data){
+		pushKifuNode(data)
+	});
+	$("#PanelMoveList").children("select").change(function(){
+		var selected = $(this).children(":selected")
+		if (selected.attr('data-LastJsCode') == undefined || selected.attr('data-LastMoveCode') == undefined){
+			console.log("局面ノードが選択されました(最終手なし)");
+			var rsh = selected.attr('data-RshCurrent');
+			var moveCode = null;
+		} else {
+			var rsh = selected.attr('data-RshPrev');
+			console.log("局面ノードが選択されました(最終手あり)");
+			var LastJsCode = selected.attr('data-LastJsCode');
+			var LastMoveCode = selected.attr('data-LastMoveCode');
+		}
+
+		obj = {rsh:rsh,"LastJsCode":LastJsCode,"LastMoveCode":LastMoveCode};
+
+		console.log(obj);
+		SetBoardTrigger(obj);
+	});
+
 });
 
-function setMove(data){
+function pushKifuNode(data){
 	debug("局面をセットしています");
-	var selected = $("#PanelMoveList").children("select").children(":selected");
-	selected.after(
-		$('<option>')
-			.html(data.MoveText)
-			.attr({
-				"data-rshCurrent": data.Current,
-				"data-rshPrev": data.Prev,
-				"data-move": data.Move,
-			})
-	);
+	console.log("局面を追加します");
+	console.log(data);
+	var appendOption = 	$('<option>')
+							.html(data.MoveText)
+							.attr({
+								"data-RshCurrent": data.RshCurrent,
+								"data-RshPrev": data.RshPrev,
+								"data-LastJsCode": data.LastJsCode,
+								"data-LastMoveCode": data.LastMoveCode,
+							});
+
+	var listBox = $("#PanelMoveList").children("select")
+	var selected = listBox.children(":selected");
+	if (selected.length == 0) {
+		$("#PanelMoveList").children("select").append(appendOption)
+		$("#PanelMoveList").children("select").children().prop('selected', true);		
+
+	} else {
+		var nexts = listBox.children(":selected").nextAll();
+		nexts.remove();
+		console.log("寄付ノードを追加します");		
+		selected.after(appendOption)
+		selected.next().prop('selected', true);
+	}
+	selected.prop('checked',false);
 }
 
 function setMoveList(data){
@@ -24,26 +67,18 @@ function setMoveList(data){
 				$('<option>')
 					.html(data[i].MoveText)
 					.attr({
-						"data-rshCurrent": data[i].Current,
-						"data-rshPrev": data[i].Prev,
-						"data-move": data[i].Move,
-						"data-moveCode": data[i].MoveCode,
+						"data-RshCurrent": data[i].Current,
+						"data-RshPrev": data[i].Prev,
+						"data-LastMoveCode": data[i].LastMoveCode,
+						"data-LastJsCode": data[i].LastJsCode,
 					})
 				);
 	}
 }
-$("#PanelMoveList").children("select").change(function(){
-	var selected = $(this).children(":selected")
-	var rsh = selected.attr('data-rshPrev');
-	var moveCode = selected.attr('data-moveCode');
 
-//	console.log(rsh);
-	apiReloadwithMoveCode(rsh,moveCode);
+function SetBoardTrigger(obj){
+	console.log('呼び出します');
+	$("#jsBoard").trigger('setBoard',obj);
 
-})
-
-$("#PanelMoveList").ready(function(){
-	debug("panelmovelist読み込みを実行します");
-	apiLoadKifu();
-})
+}
 

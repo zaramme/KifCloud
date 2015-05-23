@@ -29,13 +29,13 @@ func (c Board) GetBoardWithMove(code, move string) revel.Result {
 	r, _ := rsh.NewRshCodeFromString(code)
 	brd := rsh.BuildBoardFromRshCode(r)
 
-	if mv := m.NewMoveFromMoveCode(move); mv == nil {
+	mv := m.NewMoveFromMoveCode(move)
+	if mv == nil {
 		return c.RenderJson("nil")
-	} else {
-		brd.AddMove(mv)
 	}
 
 	json, _ := j.BoardToJson(brd)
+	json.AppendLastMove(mv)
 	return c.RenderJson(json)
 }
 

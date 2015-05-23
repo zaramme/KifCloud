@@ -130,9 +130,11 @@
     </div>
 
      <form id="hidden_info" name="info">
-      <input type="hidden" name="rsh" value="{{ .currentCode}}" />
-      <input type="hidden" name="rshPrev" value="{{ .previousCode}}" />
-      <input type="hidden" name="currentMove" value="{{ .moveCode}}" />
+      <input type="hidden" name="RshCurrent" value="{{ .currentCode}}" />
+      <input type="hidden" name="RshPrev" value="{{ .previousCode}}" />
+      <input type="hidden" name="LastMoveCode" value="{{ .moveCode}}" />
+      <input type="hidden" name="LastJsCode" value="{{ .moveCode}}" />
+      <input type="hidden" name="MoveText" value="{{ .moveCode}}" />
     </form>
 </div>
 

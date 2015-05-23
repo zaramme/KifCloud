@@ -11,12 +11,25 @@ function main(){
 	$(".board").css('background','url(\''+IMG_DIR+'/japanese-chess-b02.png\')')
 	$("#bgboard").attr("src",IMG_DIR+"/japanese-chess-b02.png");
 
+
+	// 初期盤面の追加
 	$("#jsBoard").on("setBoard", function(ev,data){
 		apiGetBoardState(data["rsh"],null, function(boardState){
 			moveAllPieceInDock();
 			methods.constructBoardFromBoardState(boardState);
-			doMovePieceFromMoveCode(data["moveCode"]);			
-			panelReloadTrigger();			
+			if ( data["LastJsCode"] != null && data["LastMoveCode"] != null){
+				doMovePieceFromMoveCode(data["LastJsCode"]);			
+				refreshClickablePieceSetting();
+				apiGetBoardInfo(data["rsh"],data["LastMoveCode"],function(boardData){
+					console.log("最終着手付き");
+					console.log(boardData);
+					methods.setInfo(boardData);
+					panelReloadTrigger();					
+				});
+			} else {
+			methods.setInfo(boardState.Info);
+			panelReloadTrigger();
+			}
 		});
 	});
 
@@ -24,21 +37,30 @@ function main(){
 }
 function initBoard(){
 	var methods = new ctrMethods();
-	if ( document.info.rshPrev.value && document.info.currentMove.value) {
+	if ( document.info.RshPrev.value && document.info.CurrentMove.value) {
 		//最終手が指定されている場合は、rshPrevを読み込んで最終手を着手
-		apiGetBoardState(document.info.rshPrev.value, null, function(boardState){
+		apiGetBoardState(document.info.RshPrev.value, null, function(boardState){
 			methods.constructBoardFromBoardState(boardState);
-			doMovePieceFromMoveCode(document.info.currentMove.value);
+			doMovePieceFromMoveCode(document.info.CurrentMove.value);
 			panelReloadTrigger()
+			PushKifuNodeTrigger(boardState.Info);
 		});
 	} else {
 		//最終手が指定されていない場合は、rshCurrentを読み込み
-		apiGetBoardState(document.info.rsh.value,null,function(boardState){
+		apiGetBoardState(document.info.RshCurrent.value,null,function(boardState){
 			// 盤面の設定
 			methods.constructBoardFromBoardState(boardState);
-			if (!document.info.rsh.value) {
+			if (!document.info.RshPrev.value) {
 				// 初手の場合はRSHが設定されていないので取得
 				methods.setInfo(boardState.Info);
+				pushKifuNode(
+					{
+						"RshCurrent":boardState.Info.RshCurrent,
+						"MoveText":"(開始局面)"
+					});
+
+			} else {
+				pushKifuNode(boardState.Info);
 			}
 			panelReloadTrigger();
 		});
@@ -50,6 +72,11 @@ function panelReloadTrigger(){
 	var reloadPanel = new $.Event("reloadPanel")
 	$(".panel").trigger("reloadPanel");
 }
+
+function PushKifuNodeTrigger(data){
+	$("#PanelMoveList").trigger('pushKifuNode',data)
+}
+
 
 // 選択可能な駒のセット
 function refreshClickablePieceSetting(){
@@ -148,8 +175,9 @@ function addMovable(toPos) {
 			{
 				case true:
 					if(doMovePiece(fromPos,toPos, pieceToMove, true)){
-						var boardInfo = apiGetBoardInfo(document.info.rsh.value, moveCode,function(boardInfo){
+						var boardInfo = apiGetBoardInfo(document.info.RshCurrent.value, moveCode,function(boardInfo){
 							methods.setInfo(boardInfo);
+							PushKifuNodeTrigger(boardInfo);
 						});
 						refreshClickablePieceSetting();
 					}
@@ -159,9 +187,10 @@ function addMovable(toPos) {
 					break;
 				case false:
 					if(doMovePiece(fromPos,toPos, pieceToMove, false)){
-						var boardInfo =apiGetBoardInfo(document.info.rsh.value, moveCode,function(boardInfo){
+						var boardInfo = apiGetBoardInfo(document.info.RshCurrent.value, moveCode,function(boardInfo){
 							console.log(boardInfo);
 							methods.setInfo(boardInfo);
+							PushKifuNodeTrigger(boardInfo);
 						});
 						refreshClickablePieceSetting();
 					}
@@ -180,7 +209,8 @@ function addMovable(toPos) {
 // この画面が表示されている場合は処理をストップする
 function ShowReservedView(fromPos, toPos, pieceToMove) {
 	debug("成りセレクトを表示しています");
-	Methods = new moveMethods();
+	var Methods = new moveMethods();
+	var cMethods = new ctrMethods();
 	pcPiectToMove = new pieceConductor(pieceToMove);
 	targetPos = getAreaObject(toPos);
 	targetPiece = getPieceObject(toPos);
@@ -220,6 +250,10 @@ function ShowReservedView(fromPos, toPos, pieceToMove) {
 		ghost.addClass('hidden');
 		if(doMovePiece(fromPos,toPos, pieceToMove, isPromotion)) //着手する
 		{
+			var boardInfo = apiGetBoardInfo(document.info.RshCurrent.value, moveCode,function(boardInfo){
+				cMethods.setInfo(boardInfo);
+				PushKifuNodeTrigger(boardInfo);
+			});
 			debug("着手成功");
 			// 着手が成功した場合の処理
 			$("#selectbox").children(".button").unbind('click'); //Clickイベントを削除
@@ -286,8 +320,10 @@ ctrMethods.prototype.constructBoardFromBoardState = function(boardState) {
 };
 
 ctrMethods.prototype.setInfo = function(boardInfo){
-	document.info.rsh.value = boardInfo.RshCurrent;
-	document.info.rshPrev.value = boardInfo.RshPrev;
-	document.info.currentMove.value  = boardInfo.LastMove;
+	document.info.RshCurrent.value = boardInfo.RshCurrent;
+	document.info.RshPrev.value = boardInfo.RshPrev;
+	document.info.LastMoveCode.value  = boardInfo.LastMoveCode;
+	document.info.LastJsCode.value  = boardInfo.LastJsCode;
+	document.info.MoveText.value = boardInfo.MoveText;
 	panelReloadTrigger();
 }
