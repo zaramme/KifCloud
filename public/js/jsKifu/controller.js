@@ -16,10 +16,20 @@ $(function(){
 	});
 	$("#PanelMoveList").children("select").change(function(){
 		var selected = $(this).children(":selected")
+		var lastJsCode = selected.attr('data-LastJsCode')
+		console.log('lastJsCode = ' + lastJsCode)
 		if (selected.attr('data-LastJsCode') == undefined || selected.attr('data-LastMoveCode') == undefined){
 			console.log("局面ノードが選択されました(最終手なし)");
 			var rsh = selected.attr('data-RshCurrent');
 			var moveCode = null;
+		} else if (lastJsCode == 'END_OF_GAME')
+		{
+			console.log("局面ノードが選択されました(終了)");			
+			selected = selected.prev()
+			var rsh = selected.attr('data-RshPrev');
+			var LastJsCode = selected.attr('data-LastJsCode');
+			var LastMoveCode = selected.attr('data-LastMoveCode');
+
 		} else {
 			var rsh = selected.attr('data-RshPrev');
 			console.log("局面ノードが選択されました(最終手あり)");
