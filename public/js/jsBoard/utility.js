@@ -10,11 +10,11 @@ $(function(){
 
 function debug(message)
 {
-	if(IsDebugMode && $(".debugend").get(0)){
-		$(".debugend").removeClass("debugend");
-	}
-		$("#debug").append("<div class=\"debugend\">" +message + "</div>");
-		$("#debug").scrollTop($(".debugend").offset().top);
+	// if(IsDebugMode && $(".debugend").get(0)){
+	// 	$(".debugend").removeClass("debugend");
+	// }
+	// 	$("#debug").append("<div class=\"debugend\">" +message + "</div>");
+	// 	$("#debug").scrollTop($(".debugend").offset().top);
 }
 
 function selectAreaID(posID){
