@@ -1,11 +1,11 @@
 package controllers
 
 import (
-	b "KifuLibrary-Logic/board"
-	rsh "KifuLibrary-Logic/rsh"
+	b "github.com/zaramme/KifCloud-Logic/board"
+	rsh "github.com/zaramme/KifCloud-Logic/rsh"
 	// /	"KifCloud/app/models/auth"
-	m "KifuLibrary-Logic/move"
 	"github.com/robfig/revel"
+	m "github.com/zaramme/KifCloud-Logic/move"
 )
 
 type App struct {

@@ -1,11 +1,11 @@
 package controllers
 
 import (
-	b "KifuLibrary-Logic/board"
-	j "KifuLibrary-Logic/jsonConverter"
-	m "KifuLibrary-Logic/move"
-	rsh "KifuLibrary-Logic/rsh"
 	"github.com/robfig/revel"
+	b "github.com/zaramme/KifCloud-Logic/board"
+	j "github.com/zaramme/KifCloud-Logic/jsonConverter"
+	m "github.com/zaramme/KifCloud-Logic/move"
+	rsh "github.com/zaramme/KifCloud-Logic/rsh"
 )
 
 type Board struct {

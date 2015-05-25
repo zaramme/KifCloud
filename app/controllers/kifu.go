@@ -2,9 +2,9 @@ package controllers
 
 import (
 	kifu "KifCloud-Mapper/kifu"
-	loader "KifuLibrary-Logic/kifLoader"
-	r "KifuLibrary-Logic/routes"
 	"github.com/robfig/revel"
+	loader "github.com/zaramme/KifCloud-Logic/kifLoader"
+	r "github.com/zaramme/KifCloud-Logic/routes"
 	"os"
 	"strings"
 )
