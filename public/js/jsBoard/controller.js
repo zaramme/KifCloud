@@ -18,7 +18,6 @@ function main(){
 	});
 
 	initBoard();
-	apiLoadKifu(22);
 }
 function initBoard(){
 	var methods = new ctrMethods();
