@@ -13,6 +13,7 @@ GET 	/board/:code/:move      App.Index
 #GET 	/textloader				Utils.TextLoader
 
 GET 	/about					App.About
+GET 	/release				App.Release
 
 #GET 	/login					Auth.Login
 #GET 	/token 					Auth.GetToken

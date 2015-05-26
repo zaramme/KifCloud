@@ -54,3 +54,6 @@ func (c App) Submit() revel.Result {
 func (c App) About() revel.Result {
 	return c.Render()
 }
+func (c App) Release() revel.Result {
+	return c.Render()
+}
