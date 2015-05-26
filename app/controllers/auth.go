@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"KifCloud/app/models/auth"
+	//	"KifCloud/app/models/auth"
 	"github.com/robfig/revel"
 )
 
@@ -11,21 +11,21 @@ type Auth struct {
 
 func (c Auth) Login() revel.Result {
 
-	json := make(map[string]interface{})
-	res, token := auth.ConfirmToken(c.Session)
+	// json := make(map[string]interface{})
+	// res, token := auth.ConfirmToken(c.Session)
 
-	if res {
-		json["isConfirmed"] = true
-		json["Token"] = token
-	} else {
-		json["isConfirmed"] = false
-	}
+	// if res {
+	// 	json["isConfirmed"] = true
+	// 	json["Token"] = token
+	// } else {
+	// 	json["isConfirmed"] = false
+	// }
 
-	return c.RenderJson(json)
+	return c.RenderJson(nil)
 }
 
-func (c Auth) GetToken() revel.Result {
-	auth.GetToken(c.Session)
+// func (c Auth) GetToken() revel.Result {
+// 	// auth.GetToken(c.Session)
 
-	return c.Redirect("/login")
-}
+// 	return c.Redirect("/login")
+// }

@@ -13,6 +13,6 @@ type Utils struct {
 }
 
 func (c Utils) TextLoader(kifText []byte) revel.Result {
-	revel.INFO.Printf("kiftext = %s", string(kifText))
-	return c.Render(string(kifText))
+	// revel.INFO.Printf("kiftext = %s", string(kifText))
+	return c.Render()
 }
