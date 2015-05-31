@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"github.com/robfig/revel"
 	b "github.com/zaramme/KifCloud-Logic/board"
 	j "github.com/zaramme/KifCloud-Logic/jsonConverter"
@@ -21,7 +22,10 @@ func (c Board) Init() revel.Result {
 func (c Board) GetBoard(code string) revel.Result {
 	r, _ := rsh.NewRshCodeFromString(code)
 	brd := rsh.BuildBoardFromRshCode(r)
-	json, _ := j.BoardToJson(brd)
+	json, err := j.BoardToJson(brd)
+	if err != nil {
+		return c.RenderError(err)
+	}
 	return c.RenderJson(json)
 }
 
@@ -31,10 +35,13 @@ func (c Board) GetBoardWithMove(code, move string) revel.Result {
 
 	mv := m.NewMoveFromMoveCode(move)
 	if mv == nil {
-		return c.RenderJson("nil")
+		return c.RenderError(fmt.Errorf("error: %sは正しいmovecodeではありません", move))
 	}
 
 	json, _ := j.BoardToJson(brd)
-	json.AppendLastMove(mv)
+	err := json.AppendLastMove(mv)
+	if err != nil {
+		return c.RenderError(err)
+	}
 	return c.RenderJson(json)
 }

@@ -33,8 +33,14 @@ func (c App) Index(code string, move string) revel.Result {
 		return c.Render()
 	}
 	brd.AddMove(moveObj)
-	currentRsh := rsh.ConvertRshFromBoard(brd)
-	currentCode = currentRsh.ToString()
+	currentRsh, nil := rsh.ConvertRshFromBoard(brd)
+	if err != nil {
+		return c.Render()
+	}
+	currentCode, err = currentRsh.ToString()
+	if err != nil {
+		return c.Render()
+	}
 	previousCode := code
 	moveCode := moveObj.ToJsCode()
 	return c.Render(previousCode, moveCode, currentCode)
