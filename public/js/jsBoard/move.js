@@ -275,7 +275,7 @@ moveMethods.prototype.appendImage = function(pieceObj, kindOfPiece, isBlack, isP
 
 moveMethods.prototype.addPieceCountText = function(target,length){
 	if(length > 1)
-		target.after("<div class=\"test\"><b>×" +length+ "</b></div>");
+		target.after("<div class=\"test\"><div class=\"piece-count\">×" +length+ "</div></div>");
 	else
 		target.after("<div class=\"test\"></div>");
 }
