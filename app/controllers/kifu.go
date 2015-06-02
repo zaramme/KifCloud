@@ -13,6 +13,12 @@ type Kifu struct {
 	*revel.Controller
 }
 
+type JsonLoadText struct {
+	StatusCode int
+	Message    string
+	Data       []map[string]string
+}
+
 func (c Kifu) GetKifu(kifuID string) revel.Result {
 	// routes := kifu.GetKifu(kifuID)
 
@@ -31,20 +37,40 @@ func (c Kifu) GetKifu(kifuID string) revel.Result {
 }
 
 func (c Kifu) LoadText(kifText string) revel.Result {
+	var json JsonLoadText
+	json.StatusCode = 0
+
+	if len(kifText) == 0 {
+		json.StatusCode = 10
+		json.Message = "文字列を入力してください"
+		return c.RenderJson(json)
+	}
 
 	// 改行コードで変換
 	slist := strings.SplitN(kifText, "\r\n", -1)
 
+	getMessage := func(err error) string {
+		if errUser, ok := err.(loader.ErrorForUser); ok {
+			return errUser.UserError
+		} else {
+			return "システムエラー：管理者にお問い合わせください"
+		}
+	}
+
 	// kifクラスに変換
 	kif, err := loader.LoadStringList(slist)
 	if err != nil {
-		return c.RenderError(err)
+		json.StatusCode = 10
+		json.Message = getMessage(err)
+		return c.RenderJson(json)
 	}
 
 	// routesクラスに変換
 	routes, err := r.NewRoutesFromKifuFile(kif)
 	if err != nil {
-		return c.RenderError(err)
+		json.StatusCode = 10
+		json.Message = getMessage(err)
+		return c.RenderJson(json)
 	}
 
 	output := make([]map[string]string, len(routes))
@@ -57,7 +83,10 @@ func (c Kifu) LoadText(kifText string) revel.Result {
 		output[i]["LastJsCode"] = route.Move.ToJsCode()
 		output[i]["MoveText"] = route.Move.ToJpnCode()
 	}
-	return c.RenderJson(output)
+
+	json.Data = output
+
+	return c.RenderJson(json)
 }
 
 func (c Kifu) Upload(file *os.File) revel.Result {

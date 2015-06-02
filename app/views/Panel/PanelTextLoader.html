@@ -5,12 +5,16 @@
 	</div>
 	<form role="form">
 	<div class="box-body">
-		<div class="form-group">
+		<div id="kifTextInput" class="form-group">
+			<label class="control-label" for="inputSuccess">
+				<i class="fa fa-check"></i>
+				棋譜ファイルを読み込みました</label>
 			<textarea class="form-control" name="kifText" rows="5" placeholder="ここに.kif形式の棋譜をペーストしてください"></textarea>
 		</div>
 	</div>
 	<div class="box-footer">
-		<input type="submit" class="btn btn-primary" value="読み込み" />
+			<input type="submit" class="btn btn-primary" value="読み込み" />
+			<input type="reset" class="btn btn-primary" value="クリア" />
 	</div>
 </form>
 </div>
