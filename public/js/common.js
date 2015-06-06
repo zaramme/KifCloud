@@ -1,10 +1,14 @@
 $(function(){
+
+	//modalError();
+
 	$('[data-toggle=popover]').hover(function() {
 		$(this).popover('show');
 	}, function() {
 		 $(this).popover('hide');
 	});
-	$('[data-toggle=tooltip]').click(function() {
+	$('[data-toggle=tooltip]').click
+	(function() {
 		$(this).tooltip('hide');
 	});
 

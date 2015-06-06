@@ -27,7 +27,4 @@ function apiDirectLoadText(form,callback){
 	.always(function() {
 		console.log("complete");
 	});
-	
-	url = 
-	type = 
 }

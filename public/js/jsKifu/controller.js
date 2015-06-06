@@ -54,27 +54,36 @@ function clearKifu(){
 function setKifuWithJson(data){
 	clearKifu();
 	console.log("--棋譜をセットしています");
-	console.log(data);
+	//console.log(data);
 	data = data.json;
-	for (var i = 0, len = data.length; i < len; i++){
-			$("#PanelMoveList").children("select")
-			.append(
-				$('<option>')
-					.html(data[i].MoveText)
-					.attr({
-						"data-RshCurrent": data[i].RshCurrent,
-						"data-RshPrev": data[i].RshPrev,
-						"data-LastMoveCode": data[i].LastMoveCode,
-						"data-LastJsCode": data[i].LastJsCode,
-					})
-				);
-	}	
+
+	apiGetKifuInit(function(boardState){
+		pushKifuNode({
+						"RshCurrent":boardState.Info.RshCurrent,
+						"MoveText":"(開始局面)"
+					});
+
+		for (var i = 0, len = data.length; i < len; i++){
+				$("#PanelMoveList").children("select")
+				.append(
+					$('<option>')
+						.html(data[i].MoveText)
+						.attr({
+							"data-RshCurrent": data[i].RshCurrent,
+							"data-RshPrev": data[i].RshPrev,
+							"data-LastMoveCode": data[i].LastMoveCode,
+							"data-LastJsCode": data[i].LastJsCode,
+						})
+					);
+		}	
+
+	});
 }
 
 function pushKifuNode(data){
 	debug("局面をセットしています");
 	console.log("局面を追加します");
-	console.log(data);
+	//console.log(data);
 	var appendOption = 	$('<option>')
 							.html(data.MoveText)
 							.attr({

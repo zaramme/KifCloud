@@ -15,3 +15,17 @@ function apiLoadKifu(kifuID){
 		},
 	});
 }
+
+function apiGetKifuInit(callback){
+	var url = API_RSH + "/";
+	$.ajax({
+		url: url,
+		dataType: 'json'
+	})
+	.done(function(boardState) {
+		callback(boardState);
+	})
+	.fail(function() {
+		console.log("apiロードに失敗しました。resource= " + rsh );
+	});
+}
