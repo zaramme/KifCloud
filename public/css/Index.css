@@ -49,3 +49,27 @@
 	font-size:9pt;
 	font-weight: none !important;
 }
+
+/* 説明用段落組　*/
+
+.kc-document dd {
+	padding-bottom:10px;
+}
+
+
+.kc-document ul {
+	list-style-type: circle;
+	padding-left: 25px;
+}	
+
+.kc-document h2 {
+	color:#883300;
+	font-weight: bold;
+	padding-top:10px;
+	font-size: 20px;
+}
+
+.kc-document blockquote {
+	font-size: 14px;
+	margin-left:10px;
+}
