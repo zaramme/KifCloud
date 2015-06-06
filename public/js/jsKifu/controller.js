@@ -10,21 +10,21 @@ $(function(){
 		pushKifuNode(data)
 	});
 	$("#PanelMoveList").on("loadKifuWithJson", function(ev,data){
-		console.log("jsKifuが呼び出されました：loadKifuWithJson")
-		console.log(data);
+		//console.log("jsKifuが呼び出されました：loadKifuWithJson")
+		//console.log(data);
 		setKifuWithJson(data);
 	});
 	$("#PanelMoveList").children("select").change(function(){
 		var selected = $(this).children(":selected")
 		var lastJsCode = selected.attr('data-LastJsCode')
-		console.log('lastJsCode = ' + lastJsCode)
+		//console.log('lastJsCode = ' + lastJsCode)
 		if (selected.attr('data-LastJsCode') == undefined || selected.attr('data-LastMoveCode') == undefined){
-			console.log("局面ノードが選択されました(最終手なし)");
+			//sconsole.log("局面ノードが選択されました(最終手なし)");
 			var rsh = selected.attr('data-RshCurrent');
 			var moveCode = null;
 		} else if (lastJsCode == 'END_OF_GAME')
 		{
-			console.log("局面ノードが選択されました(終了)");			
+			//console.log("局面ノードが選択されました(終了)");			
 			selected = selected.prev()
 			var rsh = selected.attr('data-RshPrev');
 			var LastJsCode = selected.attr('data-LastJsCode');
@@ -32,14 +32,14 @@ $(function(){
 
 		} else {
 			var rsh = selected.attr('data-RshPrev');
-			console.log("局面ノードが選択されました(最終手あり)");
+			//console.log("局面ノードが選択されました(最終手あり)");
 			var LastJsCode = selected.attr('data-LastJsCode');
 			var LastMoveCode = selected.attr('data-LastMoveCode');
 		}
 
 		obj = {rsh:rsh,"LastJsCode":LastJsCode,"LastMoveCode":LastMoveCode};
 
-		console.log(obj);
+		//console.log(obj);
 		SetBoardTrigger(obj);
 	});
 
@@ -53,7 +53,7 @@ function clearKifu(){
 
 function setKifuWithJson(data){
 	clearKifu();
-	console.log("--棋譜をセットしています");
+	//console.log("--棋譜をセットしています");
 	//console.log(data);
 	data = data.json;
 
@@ -81,8 +81,8 @@ function setKifuWithJson(data){
 }
 
 function pushKifuNode(data){
-	debug("局面をセットしています");
-	console.log("局面を追加します");
+	//debug("局面をセットしています");
+	//console.log("局面を追加します");
 	//console.log(data);
 	var appendOption = 	$('<option>')
 							.html(data.MoveText)
@@ -102,7 +102,7 @@ function pushKifuNode(data){
 	} else {
 		var nexts = listBox.children(":selected").nextAll();
 		nexts.remove();
-		console.log("寄付ノードを追加します");		
+		//console.log("寄付ノードを追加します");		
 		selected.after(appendOption)
 		selected.next().prop('selected', true);
 	}
@@ -110,7 +110,7 @@ function pushKifuNode(data){
 }
 
 function setMoveList(data){
-		debug("--棋譜をセットしています");
+		//debug("--棋譜をセットしています");
 	for (var i = 0, len = data.length; i < len; i++){
 			$("#PanelMoveList").children("select")
 			.append(
@@ -127,7 +127,7 @@ function setMoveList(data){
 }
 
 function SetBoardTrigger(obj){
-	console.log('呼び出します');
+	//console.log('呼び出します');
 	$("#jsBoard").trigger('setBoard',obj);
 
 }

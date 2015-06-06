@@ -1,13 +1,10 @@
 $(function(){
 
-	console.log("panelTextLoader.jsを読み込みました");
-
 	mainPanelTextLoader();
 
 	var form = $("#panelTextLoader").find("form");
 	var kifInput = form.children("div").children("#kifTextInput");
 	kifInput.children('#ptl-sampleKifu').click(function(e){
-		console.log("clicked!");
 		e.preventDefault();
 		setSampleKif();	
 	})
@@ -21,7 +18,6 @@ function mainPanelTextLoader(){
 	kifInput.children('label').hide();
 
 	form.submit(function(event) {
-		console.log("読み込みボタンが押されました");
 
 		// 通常のフォーム送信をブロック
 		event.preventDefault();
@@ -61,7 +57,6 @@ function SetValidator(isValid, message){
 }
 
 function LoadDirectTextTrigger(data){
-	console.log("trigger");
 	$("#PanelMoveList").trigger('loadKifuWithJson',{"json":data});
 }
 

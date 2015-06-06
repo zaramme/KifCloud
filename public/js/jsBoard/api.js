@@ -15,7 +15,6 @@ function apiGetBoardState(rsh, lastMove, callback){
 		callback(boardState);
 	})
 	.fail(function() {
-		console.log("apiロードに失敗しました。resource= " + rsh );
 	});
 }
 
@@ -29,6 +28,5 @@ function apiGetBoardInfo(rsh, lastMove, callback){
 		callback(boardData.Info);
 	})
 	.fail(function() {
-		console.log("apiロードに失敗しました。resource= " + rsh );
 	});	
 }
