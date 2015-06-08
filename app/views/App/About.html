@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>KifCloudとは？</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  {{template "Common/CommonStyles.html" .}}
+  <link rel="stylesheet" href="/public/css/index.css" type="text/css" />
+</head>
+<body class="skin-blue">
+  <header class="header">
+    {{template "Common/TopNavigation.html" .}}
+  </header>
+  <section class="content">
+  	<div class="row">
+      <div class="col-lg-3 col-lg-offset-1 col-md-4 col-sm-6">
+        <div id="kc-about-navigation" class="box box-solid">
+          <div class="box-header with-border">
+            <i class="fa fa-list"></i>
+          </div>
+          <div clss="box-body">
+            <ul>
+              <li><a href="#features">KifCloudでできること</a>
+                <ul>
+                  <li>検討する！</li>
+                  <li>共有する！</li>
+                </ul>
+              </li>
+              <li><a href="#develop">開発について</a>
+                  <ul>
+                    <li>今後の開発に関して</li>
+                    <li>開発・運営費用について</li>
+                  </ul>
+              <li><a href="#contact">お問い合わせ</a></li>
+              <li><a href="#disclaimer">免責事項</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  		<div class="col-lg-7 col-md-8 col-sm-12">
+        <div class="box">
+          <div class="box-header with-border">
+            <h4 class="box-title">KifCloudについて</h4>
+          </div>
+          <div class="box-body kc-document">
+            <h2>KifCloudとは？</h2>
+          <p>KifCloudは、ブラウザ上から誰でもアクセスできる棋譜・局面管理サービスです。</p>
+
+          <h2 id="features">KifCloudでできること</h2>
+          <dl>
+            <dt>その１：検討する！</dt>
+            <dd><ul>
+              <li>ブラウザ上で動く将棋盤「局面ボード」を使って、盤駒がない環境でも手軽に研究や検討ができます。
+              </li>
+              <li>
+                棋譜読み込み機能が付属しており、「将棋倶楽部２４」の棋譜や、お手持ちのプロ棋士の棋譜を読み込むことが可能です。
+              </li>
+            </ul></dd>
+          <dt>その２：共有する！</dt>
+            <dd><ul>
+              <li>・局面ボード上で表示している局面に対しては、自動的に局面URLが生成されるので、手軽に知り合いやブログ上で共有できます。こんな感じです。            <blockquote>
+            <a href="/board/XJiqR_4LfDA-MYR7qo0e4RpgUghpFP-HHV4_T0" target="blank">http://kifcloud.info/board/XJiqR_4LfDA-MYR7qo0e4RpgUghpFP-HHV4_T0</a><br />(振り飛車急戦・▲４五歩早仕掛け)</blockquote></li>
+
+          <li>お手持ちの棋譜をKifCloud上にアップロードして、棋譜URLを用いて、ほかの人とシェアすることができます。(現在開発中)</li></ul></dd>
+
+          <h2 id="develop">開発について</h2>
+          <dl>
+          <dd>
+            KifCloudは、管理人が週末プログラミングで個人的に開発しているWebサービスです。</dd>
+            <dt> 今後の開発に関して</dt>
+            <dd>2015年6月リリースの<a href="/release">version:若菜</a>は、初回リリースということで、アップロード系の機能がまだないなど、かなり機能は控えめになっています。１〜２ヶ月に１度くらいを目標に、がしがし機能追加していくつもりですので、楽しみに待っていていただければ幸いです。詳しい開発状況は<a href="/release">リリースノート</a>をご参照ください。</dd>
+            <dt>開発・運営費用について</dt>
+            <dd>……今のところ持ち出しです。はい。<br />
+            盤駒デザインをデザイナーさんに頼んでいたり、毎月のサーバー費用などもかかりますので、将来的にはあまり阿漕にならないレベルで収益化も視野に入れています。いきなり広告とかがつくかもしれませんがご了承ください。</dd>
+          <h2 id="contact">お問い合わせ</h2>
+          <ul>
+            <li>バグ・不具合があるんだけど</li>
+            <li>使い方がわからん！どうしたらいいの？</li>
+              <li>こんな機能が欲しい！</li>
+            </ul>
+              <p>などなど、気軽にコメントいただけると励みになります。Twitterがオススメです。</p>
+            <dl>
+              <dt>twitter</dt>
+              <dd>
+          <a class="twitter-timeline" href="https://twitter.com/KifCloud" data-widget-id="607005469870153728">@KifCloudさんのツイート</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+              </dd>
+            <dt>メールアドレス</dt>
+            <dd>support@kifcloud.info</dd>
+          </h2>
+          <h2 id="disclaimer"> 免責事項 </h2>
+            <ul>
+              <li>KifCloudを利用することで発生した、いかなる損害についても、KifCloud管理人は一切の責任を負いません。</li>
+              <li>
+              KifCloudが提供する局面・棋譜へのURLは、予告なく変更する可能性があります。あらかじめご理解ください。
+              </li>
+            </ul></dd>
+
+
+         </div><!-- /.box-body -->
+        </div><!-- /.box -->
+    </div>
+  </section>
+</html>

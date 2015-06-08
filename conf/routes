@@ -5,6 +5,17 @@
 module:testrunner
 
 GET     /                                       App.Index
+GET 	/board/:code			App.Index
+GET 	/board/:code/:move      App.Index
+
+GET 	/about					App.About
+GET 	/release				App.Release
+
+GET		/api/board								Board.InitBoard
+GET		/api/board/:code		Board.getBoard
+GET   	/api/board/:code/:move	Board.getBoardWithMove
+
+POST	/api/kifu/directTextLoader		Kifu.LoadText
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
