@@ -30,7 +30,6 @@ function doMovePiece(fromPos,toPos,PieceToMove,isPromoted){
 	if(isOhteNow)
 	{
 		// 王手が継続している場合は着手を無効とする
-		debug("王手がかかっています！");
 		movePiece(fromPos,PieceToMove, isBlackTurn, isPromoted);// 移動前の座標に戻す
 		if(PieceToCapture.length != 0)
 			movePiece(pcToCapture.pos,PieceToCapture,!isBlackTurn,pcToCapture.isPromoted);
@@ -326,7 +325,6 @@ moveMethods.prototype.FinishMove = function(fromPos,toPos,kindOfPiece,isPromoted
 
 	sortCapturedArea();
 
-	debug("着手を完了しました。移動コード…"+moveCode);
 }
 
 moveMethods.prototype.getMovecode = function(fromPos,toPos,kindOfPiece,isPromoted)

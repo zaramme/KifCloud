@@ -15,8 +15,6 @@ function bitBoard(){
 }
 
 bitBoard.prototype.output = function(){
-	debug("current bitBoard is...");
-
 	debug(this.board[91] + ", "  + this.board[81] + ", "  + this.board[71] + ", "  + this.board[61] + ", "  + this.board[51] + ", "  + this.board[41] + ", "  + this.board[31] + ", "  + this.board[21] + ", "  + this.board[11])
 	debug(this.board[92] + ", "  + this.board[82] + ", "  + this.board[72] + ", "  + this.board[62] + ", "  + this.board[52] + ", "  + this.board[42] + ", "  + this.board[32] + ", "  + this.board[22] + ", "  + this.board[12])
 	debug(this.board[93] + ", "  + this.board[83] + ", "  + this.board[73] + ", "  + this.board[63] + ", "  + this.board[53] + ", "  + this.board[43] + ", "  + this.board[33] + ", "  + this.board[23] + ", "  + this.board[13])

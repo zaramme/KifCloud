@@ -4,7 +4,6 @@ IsDebugMode = true;
 
 
 $(function(){
-
 	debug("utility.jsを読み込みました");
 });
 

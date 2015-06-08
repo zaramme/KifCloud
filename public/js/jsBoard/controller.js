@@ -73,7 +73,6 @@ function setBoardWithData(rsh,lastJsCode,lastMoveCode){
 
 // パネル更新イベントの発生
 function panelReloadTrigger(){
-	debug("パネル更新トリガーが呼び出されました");
 	var reloadPanel = new $.Event("reloadPanel")
 	$(".panel").trigger("reloadPanel");
 }
@@ -201,7 +200,6 @@ function addMovable(toPos) {
 					}
 					break;
 				case "error":
-					debug("エラーが発生しました");
 					break;
 			}
 		}
@@ -233,7 +231,6 @@ function ShowReservedView(fromPos, toPos, pieceToMove) {
 	pieceToMove.addClass("hidden");
 	targetPiece.addClass("hidden");
 
-	debug("ゴーストを表示します");
 	ghost = $("#ghost");
 	ghost.addClass('virtual');
 	ghost.removeClass('hidden');
@@ -259,7 +256,6 @@ function ShowReservedView(fromPos, toPos, pieceToMove) {
 				cMethods.setInfo(boardInfo);
 				PushKifuNodeTrigger(boardInfo);
 			});
-			debug("着手成功");
 			// 着手が成功した場合の処理
 			$("#selectbox").children(".button").unbind('click'); //Clickイベントを削除
 			refreshClickablePieceSetting();
@@ -308,10 +304,8 @@ ctrMethods.prototype.constructBoardFromBoardState = function(boardState) {
 
 			// 持ち駒の場合の処理
 			if (posID == 0 && isBlack) {	
-				debug("持ち駒を配置します。")				
 				posID = "bc";
 			} else if (posID == 0 && !isBlack){
-				debug("持ち駒を配置します。（後手）")
 				posID = "wc";
 			}
 			 
@@ -319,7 +313,6 @@ ctrMethods.prototype.constructBoardFromBoardState = function(boardState) {
 		}
 
 		sortCapturedArea();
-		debug("盤面読み込みが終了しました")
 		IsBoardInit =true;
 		refreshClickablePieceSetting();
 };

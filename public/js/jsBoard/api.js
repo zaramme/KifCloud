@@ -1,1 +1,32 @@
-eval(function(p,a,c,k,e,r){e=function(c){return c.toString(a)};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('$(0(){f("g.hを読み込みました")});0 i(1,2,4){6 3=7+"/"+(1===5?"":1)+(2==5?"":"/"+2);$.8({3:3,9:\'a\'}).b(0(c){4(c)}).d(0(){})}0 j(1,2,4){6 3=7+"/"+(1===5?"":1)+(2==5?"":"/"+2);$.8({3:3,9:\'a\'}).b(0(e){4(e.k)}).d(0(){})}',21,21,'function|rsh|lastMove|url|callback|null|var|API_RSH|ajax|dataType|json|done|boardState|fail|boardData|debug|api|js|apiGetBoardState|apiGetBoardInfo|Info'.split('|'),0,{}))
+/////////////////////////////////////////
+// API通信を制御するメソッド群
+/////////////////////////////////////////
+$(function(){
+	debug("api.jsを読み込みました");
+	});
+
+function apiGetBoardState(rsh, lastMove, callback){
+	var url = API_RSH + "/" + (rsh===null ? "" : rsh) + (lastMove==null ? "" : "/" + lastMove );
+	$.ajax({
+		url: url,
+		dataType: 'json'
+	})
+	.done(function(boardState) {
+		callback(boardState);
+	})
+	.fail(function() {
+	});
+}
+
+function apiGetBoardInfo(rsh, lastMove, callback){
+	var url = API_RSH + "/" + (rsh===null ? "" : rsh) + (lastMove==null ? "" : "/" + lastMove );
+	$.ajax({
+		url: url,
+		dataType: 'json'
+	})
+	.done(function(boardData) {
+		callback(boardData.Info);
+	})
+	.fail(function() {
+	});	
+}
