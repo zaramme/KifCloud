@@ -11,10 +11,15 @@ type App struct {
 	*revel.Controller
 }
 
+func getHost() string {
+	return revel.Config.StringDefault("env.host", "system error")
+}
+
 func (c App) Index(code string, move string) revel.Result {
+	host := getHost()
 	var currentCode = code
 	if len(code) == 0 {
-		return c.Render()
+		return c.Render(host)
 	}
 
 	var errString string
@@ -42,7 +47,7 @@ func (c App) Index(code string, move string) revel.Result {
 			revel.INFO.Print("盤面状態が不正です。err = %s ", errString)
 			return c.Redirect("/board/notfound")
 		}
-		return c.Render(currentCode)
+		return c.Render(currentCode, host)
 	}
 
 	rshObj, err := rsh.NewRshCodeFromString(code)
@@ -65,7 +70,7 @@ func (c App) Index(code string, move string) revel.Result {
 	}
 	previousCode := code
 	moveCode := moveObj.ToJsCode()
-	return c.Render(previousCode, moveCode, currentCode)
+	return c.Render(previousCode, moveCode, currentCode, host)
 }
 
 func (c App) About() revel.Result {

@@ -14,6 +14,9 @@ $(function(){
 
 });
 
+function getHost(){
+	return document.config.host.value;
+}
 
 // エラーを表示する
 function modalError(data){
