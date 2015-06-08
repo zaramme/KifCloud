@@ -1,6 +1,6 @@
 package app
 
-import "github.com/robfig/revel"
+import "github.com/revel/revel"
 
 func init() {
 	// Filters is the default set of global filters.
@@ -21,8 +21,8 @@ func init() {
 
 	// register startup functions with OnAppStart
 	// ( order dependent )
-	// revel.OnAppStart(InitDB())
-	// revel.OnAppStart(FillCache())
+	// revel.OnAppStart(InitDB)
+	// revel.OnAppStart(FillCache)
 }
 
 // TODO turn this into revel.HeaderFilter

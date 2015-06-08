@@ -4,30 +4,7 @@
 
 module:testrunner
 
-GET     /                       App.Index
-
-GET     /board/notfound			App.BoardNotFound
-GET 	/board/:code			App.Index
-GET 	/board/:code/:move      App.Index
-
-#GET     /uploader				App.Submit
-#GET 	/textloader				Utils.TextLoader
-
-GET 	/about					App.About
-GET 	/release				App.Release
-
-#GET 	/login					Auth.Login
-#GET 	/token 					Auth.GetToken
-# API Endpoints
-GET 	/api/board/				Board.Init	
-GET		/api/board/:code		Board.getBoard
-GET   	/api/board/:code/:move	Board.getBoardWithMove
-#GET 	/api/description/:code  Panel.GetDescription
-#PUT		/api/description/:code  Panel.PutDescription
-POST	/api/kifu/directTextLoader		Kifu.LoadText
-#GET 	/api/kifu/count/		Kifu.GetKifuCount
-#GET     /api/kifu/info/userID/:userID	Kifu.GetKifuInfoList
-#GET 	/api/kifu/:kifuID		Kifu.GetKifu
+GET     /                                       App.Index
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
