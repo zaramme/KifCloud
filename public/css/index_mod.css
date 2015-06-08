@@ -1,0 +1,75 @@
+@charset "utf-8"; /*utf-8の場合*/
+
+
+#debug{
+	border: 1px solid #999999;
+	width:100%;
+	height:100%;
+	font-size:12px;
+	line-height: 120%;
+	overflow-y : scroll;
+}
+
+.btn-box-tool {
+	background: none;
+	box-shadow: none;
+	color:#999999;
+	font-size:17px;
+	}
+
+.btn-box-tool.btn-primary {
+	color:#F0F0F0;	
+	background: none;
+	box-shadow: none;
+}
+
+.popover-content {
+	color:#111111;
+	font-size:13px;
+}
+
+.popover-content h6{
+	color:#111111;
+	font-size:11px;
+	font-weight: bold;
+}
+
+.popover-content ul{
+	list-style-type: circle;
+	list-style-position: outside;
+	padding-left:15px;
+}
+
+.popover-title {
+	color:#111111;
+}
+
+
+.control-label[for=inputError]{
+	font-size:9pt;
+	font-weight: none !important;
+}
+
+/* 説明用段落組　*/
+
+.kc-document dd {
+	padding-bottom:10px;
+}
+
+
+.kc-document ul {
+	list-style-type: circle;
+	padding-left: 25px;
+}	
+
+.kc-document h2 {
+	color:#883300;
+	font-weight: bold;
+	padding-top:10px;
+	font-size: 20px;
+}
+
+.kc-document blockquote {
+	font-size: 14px;
+	margin-left:10px;
+}
