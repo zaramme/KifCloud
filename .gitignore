@@ -3,3 +3,4 @@ app/routes
 gulpfile.js
 node_modules/
 package.json
+public/img/jsBoard/old
