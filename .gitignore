@@ -1,2 +1,5 @@
 app/tmp
 app/routes
+gulpfile.js
+node_modules/
+package.json
