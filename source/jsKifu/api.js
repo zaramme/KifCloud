@@ -17,7 +17,7 @@ function apiLoadKifu(kifuID){
 }
 
 function apiGetKifuInit(callback){
-	var url = API_RSH + "/";
+	var url = 'api/board/';
 	$.ajax({
 		url: url,
 		dataType: 'json'
