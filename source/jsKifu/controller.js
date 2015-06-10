@@ -15,36 +15,46 @@ $(function(){
 		setKifuWithJson(data);
 	});
 	$("#PanelMoveList").children("select").change(function(){
-		var selected = $(this).children(":selected")
-		var lastJsCode = selected.attr('data-LastJsCode')
-		//console.log('lastJsCode = ' + lastJsCode)
-		if (selected.attr('data-LastJsCode') == undefined || selected.attr('data-LastMoveCode') == undefined){
-			//sconsole.log("局面ノードが選択されました(最終手なし)");
-			var rsh = selected.attr('data-RshCurrent');
-			var moveCode = null;
-		} else if (lastJsCode == 'END_OF_GAME')
-		{
-			//console.log("局面ノードが選択されました(終了)");			
-			selected = selected.prev()
-			var rsh = selected.attr('data-RshPrev');
-			var LastJsCode = selected.attr('data-LastJsCode');
-			var LastMoveCode = selected.attr('data-LastMoveCode');
-
-		} else {
-			var rsh = selected.attr('data-RshPrev');
-			//console.log("局面ノードが選択されました(最終手あり)");
-			var LastJsCode = selected.attr('data-LastJsCode');
-			var LastMoveCode = selected.attr('data-LastMoveCode');
-		}
-
-		obj = {rsh:rsh,"LastJsCode":LastJsCode,"LastMoveCode":LastMoveCode};
-
-		//console.log(obj);
-		SetBoardTrigger(obj);
+		loadSelectedBoard();
 	});
+
+	$("#testNextButton").click(function(){
+		selectNext();
+	});
+	$("#testPrevButton").click(function(){
+		selectPrev();
+	});	
 
 });
 
+function loadSelectedBoard(){
+	var selected = $("#PanelMoveList").children("select").children(":selected");
+	var lastJsCode = selected.attr('data-LastJsCode')
+	//console.log('lastJsCode = ' + lastJsCode)
+	if (selected.attr('data-LastJsCode') == undefined || selected.attr('data-LastMoveCode') == undefined){
+		//sconsole.log("局面ノードが選択されました(最終手なし)");
+		var rsh = selected.attr('data-RshCurrent');
+		var moveCode = null;
+	} else if (lastJsCode == 'END_OF_GAME')
+	{
+		//console.log("局面ノードが選択されました(終了)");			
+		selected = selected.prev()
+		var rsh = selected.attr('data-RshPrev');
+		var LastJsCode = selected.attr('data-LastJsCode');
+		var LastMoveCode = selected.attr('data-LastMoveCode');
+
+	} else {
+		var rsh = selected.attr('data-RshPrev');
+		//console.log("局面ノードが選択されました(最終手あり)");
+		var LastJsCode = selected.attr('data-LastJsCode');
+		var LastMoveCode = selected.attr('data-LastMoveCode');
+	}
+
+	obj = {rsh:rsh,"LastJsCode":LastJsCode,"LastMoveCode":LastMoveCode};
+
+	//console.log(obj);
+	SetBoardTrigger(obj);	
+}
 function clearKifu(){
 	var listBox = $("#PanelMoveList").children("select");
 	var nodes = listBox.children();
@@ -76,6 +86,7 @@ function setKifuWithJson(data){
 						})
 					);
 		}	
+		selectFirst();
 
 	});
 }
@@ -108,6 +119,51 @@ function pushKifuNode(data){
 	}
 	selected.prop('checked',false);
 }
+
+function selectPrev(){
+	var listBox = $("#PanelMoveList").children("select");
+	var previous = listBox.children(':selected').prev("option");
+	if ( previous.length == 0 ) {
+		console.log("<first>");
+		return;
+	}
+	console.log("<SELECT PREV>");
+	var current = listBox.children(':selected')
+
+	current.prop('selected', false);
+	previous.prop('selected', true);
+
+	loadSelectedBoard();
+}
+
+function selectNext(){
+	var listBox = $("#PanelMoveList").children("select");
+	var next = listBox.children(":selected").next("option");
+	if (next.length == 0) {
+		console.log("<last>");
+		return;
+	}
+	console.log("<SELECT NEXT>");
+	var current = listBox.children(':selected')
+
+	current.prop('selected', false);
+	next.prop('selected', true);
+
+	loadSelectedBoard();
+}
+
+function selectFirst(){
+	console.log("<SELECT FIRST>");
+	var listBox = $("#PanelMoveList").children("select").children("input");
+	var first = listBox.first();
+	var current = listBox.children(':selected');
+
+	current.prop('selected', false);
+	first.prop('selected', true);
+
+	loadSelectedBoard();
+}
+
 
 function setMoveList(data){
 		//debug("--棋譜をセットしています");
