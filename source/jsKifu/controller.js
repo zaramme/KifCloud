@@ -25,6 +25,17 @@ $(function(){
 		selectPrev();
 	});	
 
+	$('html').keyup(function(event) {
+		switch(event.which)	{
+			case 39: // Key[→]
+				selectNext();
+            break;
+ 
+            case 37: // Key[←]
+            	selectPrev();
+            break;
+ 		}
+	});
 });
 
 function loadSelectedBoard(){
