@@ -6,25 +6,28 @@ $(function(){
 //		 apiLoadKifu();
 	});
 
-	$("#PanelMoveList").on("pushKifuNode", function(ev,data){
-		pushKifuNode(data)
-	});
-	$("#PanelMoveList").on("loadKifuWithJson", function(ev,data){
-		//console.log("jsKifuが呼び出されました：loadKifuWithJson")
-		//console.log(data);
-		setKifuWithJson(data);
-	});
 	$("#PanelMoveList").children("select").change(function(){
 		loadSelectedBoard();
 	});
 
-	$("#testNextButton").click(function(){
-		selectNext();
+	// イベントリスナー
+	$("#PanelMoveList").on("loadKifuWithJson", function(ev,data){
+		setKifuWithJson(data);
 	});
-	$("#testPrevButton").click(function(){
-		selectPrev();
-	});	
 
+	$("#PanelMoveList").on("pushKifuNode", function(ev,data){
+		pushKifuNode(data)
+	});
+
+	$("#PanelMoveList").on("jkfScrollNext", function(ev,callback){
+		selectNext(callback);
+	});
+
+	$("#PanelMoveList").on("jkfScrollPrev", function(ev,callback){
+		selectPrev(callback);
+	});
+
+	// キーボードによる棋譜操作
 	$('html').keyup(function(event) {
 		switch(event.which)	{
 			case 39: // Key[→]
@@ -49,10 +52,10 @@ function loadSelectedBoard(){
 	} else if (lastJsCode == 'END_OF_GAME')
 	{
 		//console.log("局面ノードが選択されました(終了)");			
-		selected = selected.prev()
-		var rsh = selected.attr('data-RshPrev');
-		var LastJsCode = selected.attr('data-LastJsCode');
-		var LastMoveCode = selected.attr('data-LastMoveCode');
+		var selectedPrev = selected.prev()
+		var rsh = selectedPrev.attr('data-RshPrev');
+		var LastJsCode = selectedPrev.attr('data-LastJsCode');
+		var LastMoveCode = selectedPrev.attr('data-LastMoveCode');
 
 	} else {
 		var rsh = selected.attr('data-RshPrev');
@@ -64,8 +67,27 @@ function loadSelectedBoard(){
 	obj = {rsh:rsh,"LastJsCode":LastJsCode,"LastMoveCode":LastMoveCode};
 
 	//console.log(obj);
+
+
+	$('.board').trigger('jbdSetTriangleExist', hasNextorPrev(selected));
+
 	SetBoardTrigger(obj);	
 }
+
+function hasNextorPrev(selected){
+	var data = {"prev":true, "next":true};
+
+	var prev = selected.prev('option');
+	if (prev.length == 0) {
+		data["prev"] = false;
+	}
+	var next = selected.next('option');
+	if (next.length == 0) {
+		data["next"] = false;
+	}
+	return data
+}
+
 function clearKifu(){
 	var listBox = $("#PanelMoveList").children("select");
 	var nodes = listBox.children();
@@ -103,9 +125,6 @@ function setKifuWithJson(data){
 }
 
 function pushKifuNode(data){
-	//debug("局面をセットしています");
-	//console.log("局面を追加します");
-	//console.log(data);
 	var appendOption = 	$('<option>')
 							.html(data.MoveText)
 							.attr({
@@ -126,19 +145,20 @@ function pushKifuNode(data){
 		nexts.remove();
 		//console.log("寄付ノードを追加します");		
 		selected.after(appendOption)
+		selected.prop('selected',false);
 		selected.next().prop('selected', true);
 	}
-	selected.prop('checked',false);
+
+	selected = listBox.children(":selected");
+	$('.board').trigger('jbdSetTriangleExist', hasNextorPrev(selected));
 }
 
 function selectPrev(){
 	var listBox = $("#PanelMoveList").children("select");
 	var previous = listBox.children(':selected').prev("option");
 	if ( previous.length == 0 ) {
-		console.log("<first>");
 		return;
 	}
-	console.log("<SELECT PREV>");
 	var current = listBox.children(':selected')
 
 	current.prop('selected', false);
@@ -151,10 +171,8 @@ function selectNext(){
 	var listBox = $("#PanelMoveList").children("select");
 	var next = listBox.children(":selected").next("option");
 	if (next.length == 0) {
-		console.log("<last>");
 		return;
 	}
-	console.log("<SELECT NEXT>");
 	var current = listBox.children(':selected')
 
 	current.prop('selected', false);
@@ -164,7 +182,6 @@ function selectNext(){
 }
 
 function selectFirst(){
-	console.log("<SELECT FIRST>");
 	var listBox = $("#PanelMoveList").children("select").children("input");
 	var first = listBox.first();
 	var current = listBox.children(':selected');

@@ -1,5 +1,28 @@
 @charset "utf-8"; /*utf-8の場合*/
 
+
+.board .slider{
+	position: absolute;
+	margin-top:-40px;
+	margin-bottom:-40px;
+	top:50%;
+	bottom:50%;	
+	border-style: solid;
+	cursor: pointer;
+}
+
+.tri-prev {
+	left:-40px;
+	border-width: 40px 30px 40px 0;
+	border-color: transparent #dddddd transparent transparent;
+
+}
+.tri-next {
+	right:-40px;
+	border-width: 40px 0 40px 30px;
+	border-color: transparent transparent transparent #dddddd;
+}
+
 .board{
 	width: 660px;
 	position: relative;
