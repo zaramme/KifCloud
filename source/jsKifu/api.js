@@ -26,6 +26,6 @@ function apiGetKifuInit(callback){
 		callback(boardState);
 	})
 	.fail(function() {
-		console.log("apiロードに失敗しました。resource= " + rsh );
+		console.log("apiロードに失敗しました。resource= " + url );
 	});
 }

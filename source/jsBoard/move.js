@@ -264,6 +264,11 @@ moveMethods.prototype.appendImage = function(pieceObj, kindOfPiece, isBlack, isP
 }
 
 moveMethods.prototype.addPieceCountText = function(target,length){
+	if(target.hasClass('omitted')){
+		console.log('<<OMITTED>>');
+		target.after("<div class=\"test\"></div>");
+		return;
+	}
 	if(length > 1)
 		target.after("<div class=\"test\"><div class=\"piece-count\">×" +length+ "</div></div>");
 	else
