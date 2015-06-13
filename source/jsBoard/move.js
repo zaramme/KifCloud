@@ -108,7 +108,7 @@ function sortCapturedArea(pos){
 	// 駒数表示の追加
 	eachKindOfPieceDo(true, function(kindOfPiece){
 		var pieces = capturedArea.children("."+kindOfPiece);
-		var forefront = capturedArea.children("."+kindOfPiece+".forefront");
+		var forefront = capturedArea.children("."+kindOfPiece+".forefront").first();
 		methods.addPieceCountText(forefront, pieces.length);
 	})
 }
@@ -264,11 +264,6 @@ moveMethods.prototype.appendImage = function(pieceObj, kindOfPiece, isBlack, isP
 }
 
 moveMethods.prototype.addPieceCountText = function(target,length){
-	if(target.hasClass('omitted')){
-		console.log('<<OMITTED>>');
-		target.after("<div class=\"test\"></div>");
-		return;
-	}
 	if(length > 1)
 		target.after("<div class=\"test\"><div class=\"piece-count\">×" +length+ "</div></div>");
 	else
