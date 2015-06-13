@@ -10,6 +10,13 @@
 	overflow-y : scroll;
 }
 
+
+#RshPanel>textarea{
+	background: #FFFFFF;
+	cursor:text;
+	color :#333333;
+}
+
 .btn-box-tool {
 	background: none;
 	box-shadow: none;
@@ -48,6 +55,12 @@
 .control-label[for=inputError]{
 	font-size:9pt;
 	font-weight: none !important;
+}
+
+/* */
+
+#msg-welcome {
+	display: none;
 }
 
 /* 説明用段落組　*/
