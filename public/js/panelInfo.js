@@ -11,7 +11,7 @@ $("#RshPanel").on("reloadPanel", function(ev){
 
 	// テキストエリアのリロード
 	//var url = getHost() + 'board/' + document.info.RshCurrent.value
-	var url = 'http://kifcloud.info/board/' + document.info.RshCurrent.value
+	var url = document.config.host.value + 'board/' + document.info.RshCurrent.value
 	$("#RshPanel").children("textarea").html(url);
 
 	// twitterシェアボタンのリロード
