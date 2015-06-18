@@ -45,8 +45,9 @@ function loadSelectedBoard(){
 	var selected = $("#PanelMoveList").children("select").children(":selected");
 	var lastJsCode = selected.attr('data-LastJsCode')
 	//console.log('lastJsCode = ' + lastJsCode)
-	if (selected.attr('data-LastJsCode') == undefined || selected.attr('data-LastMoveCode') == undefined){
-		//sconsole.log("局面ノードが選択されました(最終手なし)");
+	if (!selected.attr('data-LastJsCode')|| !selected.attr('data-LastMoveCode')
+		|| selected.attr('data-LastJsCode') == undefined || selected.attr('data-LastMoveCode') == undefined){
+		//console.log("局面ノードが選択されました(最終手なし)");
 		var rsh = selected.attr('data-RshCurrent');
 		var moveCode = null;
 	} else if (lastJsCode == 'END_OF_GAME')

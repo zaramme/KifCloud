@@ -69,8 +69,9 @@ func (c App) Index(code string, move string) revel.Result {
 		return c.Redirect("/board/notfound")
 	}
 	previousCode := code
-	moveCode := moveObj.ToJsCode()
-	return c.Render(previousCode, moveCode, currentCode, host)
+	lastJsCode := moveObj.ToJsCode()
+	lastMoveCode := moveObj.ToMoveCode()
+	return c.Render(previousCode, lastJsCode, lastMoveCode, currentCode, host)
 }
 
 func (c App) About() revel.Result {

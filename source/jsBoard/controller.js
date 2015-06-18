@@ -19,29 +19,39 @@ function main(){
 }
 function initBoard(){
 	var methods = new ctrMethods();
-	if ( document.info.RshPrev.value && document.info.CurrentMove.value) {
+	if ( document.info.RshPrev.value && document.info.LastJsCode.value) {
 		//最終手が指定されている場合は、rshPrevを読み込んで最終手を着手
+		//console.log('最終手あり');
 		apiGetBoardState(document.info.RshPrev.value, null, function(boardState){
 			methods.constructBoardFromBoardState(boardState);
-			doMovePieceFromMoveCode(document.info.CurrentMove.value);
-			panelReloadTrigger()
-			PushKifuNodeTrigger(boardState.Info);
+			doMovePieceFromMoveCode(document.info.LastJsCode.value);
+			refreshClickablePieceSetting();
+			apiGetBoardInfo(document.info.RshPrev.value, document.info.LastMoveCode.value, function(boardState){
+				methods.setInfo(boardState);
+				panelReloadTrigger();
+				boardState.MoveText = "(指定局面)"
+				PushKifuNodeTrigger(boardState);
+			});
 		});
 	} else {
+		//console.log('最終手なし');
 		//最終手が指定されていない場合は、rshCurrentを読み込み
 		apiGetBoardState(document.info.RshCurrent.value,null,function(boardState){
 			// 盤面の設定
 			methods.constructBoardFromBoardState(boardState);
-			if (!document.info.RshPrev.value) {
+			if (!document.info.RshCurrent.value) {
+				//console.log('初形読み込み');
 				// 初手の場合はRSHが設定されていないので取得
 				methods.setInfo(boardState.Info);
 				pushKifuNode(
 					{
 						"RshCurrent":boardState.Info.RshCurrent,
-						"MoveText":"(開始局面)"
+						"MoveText":"(初期盤面)"
 					});
 
 			} else {
+				//console.log('指定局面読み込み');
+				boardState.Info.MoveText = "(指定局面)";
 				pushKifuNode(boardState.Info);
 			}
 			panelReloadTrigger();
@@ -322,5 +332,10 @@ ctrMethods.prototype.setInfo = function(boardInfo){
 	document.info.LastMoveCode.value  = boardInfo.LastMoveCode;
 	document.info.LastJsCode.value  = boardInfo.LastJsCode;
 	document.info.MoveText.value = boardInfo.MoveText;
+	// if( history && history.pushState ){
+	// 	var currentUrl = '/board/' + boardInfo.RshCurrent;
+	// 	console.log('set url = ' + currentUrl);
+	// 	history.pushState = (null,null,currentUrl);
+	// }
 	panelReloadTrigger();
 };

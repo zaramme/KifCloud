@@ -10,14 +10,16 @@ function apiLoadKifu(kifuID){
 		url: fileurl,
 		dataType: 'json',
 		success: function(data){
-				debug("--棋譜が読み込まれました");
 				setMoveList(data);
 		},
+	})
+	.fail(function() {
+		modalError();
 	});
 }
 
 function apiGetKifuInit(callback){
-	var url = 'api/board/';
+	var url = '/api/board/';
 	$.ajax({
 		url: url,
 		dataType: 'json'
@@ -26,6 +28,6 @@ function apiGetKifuInit(callback){
 		callback(boardState);
 	})
 	.fail(function() {
-		console.log("apiロードに失敗しました。resource= " + url );
+		modalError();
 	});
 }

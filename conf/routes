@@ -5,6 +5,7 @@
 module:testrunner
 
 GET     /                                       App.Index
+GET 	/board/					App.Index
 GET 	/board/:code			App.Index
 GET 	/board/:code/:move      App.Index
 
