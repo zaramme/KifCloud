@@ -6,8 +6,9 @@ main();
 
 function main(){
 	var methods = new ctrMethods()
-	$(".board").css('background','url(\''+IMG_DIR+'/japanese-chess-b02.png\')')
+	$(".board").css('background','url(\''+IMG_DIR+'/bg.png\')');
 	$("#bgboard").attr("src",IMG_DIR+"/japanese-chess-b02.png");
+
 
 
 	// 初期盤面の追加
@@ -15,7 +16,16 @@ function main(){
 		setBoardWithData(data["rsh"],data["LastJsCode"],data["LastMoveCode"]);
 	});
 
+	$('label#ck-upside-down').on('ifChecked', function(event){
+		UpsideDown.set(true);
+	});
+
+	$('label#ck-upside-down').on('ifUnchecked', function(event){
+		UpsideDown.set(false);
+	});
+
 	initBoard();
+
 }
 function initBoard(){
 	var methods = new ctrMethods();

@@ -11,6 +11,15 @@
 	cursor: pointer;
 }
 
+.board .toggles {
+	position:absolute;
+	left:auto;
+	right:5px;
+	top:-23px;
+	font-size:13px;
+}
+
+
 .tri-prev {
 	left:-40px;
 	border-width: 40px 30px 40px 0;

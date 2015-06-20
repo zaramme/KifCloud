@@ -81,7 +81,7 @@ pieceConductor.prototype.createImageID = function (){
 		case PieceImageCode.FU:
 			imgID += PieceImageCode.FU; break;
 		}
-	if(!this.isBlack){
+	if(!this.isBlack && UpsideDown.get() || this.isBlack && !UpsideDown.get()){
 		imgID += PieceImageCode.reverse;
 	}
 	if(isPromoted){
@@ -92,9 +92,7 @@ pieceConductor.prototype.createImageID = function (){
 
 
 pieceConductor.prototype.output = function(){
-	debug("駒の種類…" + this.kindOfPiece);
-	debug("駒の所有…" + this.isBlack);
-	debug("駒の成り…" + this.isPromoted);
+	console.log("駒の種類…" + this.kindOfPiece + ", 駒の所有…" + this.isBlack + ", 駒の成り…" + this.isPromoted);
 }
 
 pieceConductor.prototype.selectAreaID = function(posID){

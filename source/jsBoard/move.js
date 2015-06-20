@@ -81,8 +81,16 @@ function sortCapturedArea(pos){
 	capturedArea.children('.piece').removeClass('omitted');
 	capturedArea.children(".test").remove();
 
+	var isAssending = pos == 'bc';
+	if( UpsideDown.getState()){
+		isAssending = !isAssending;
+	}
+	// if (pos == "wc" && !UpsideDown.getState() 
+	// 	|| pos == "bc" && UpsideDown.getState){
+	// 	isAssending == false;
+	// }
 	// 駒台の駒を整理する
-	eachKindOfPieceDo(pos=="bc", function(kindOfPiece){
+	eachKindOfPieceDo(isAssending, function(kindOfPiece){
 		var pieces = capturedArea.children("."+kindOfPiece);
 		var isForefront = true;
 		pieces.each(function()
@@ -101,7 +109,7 @@ function sortCapturedArea(pos){
 	});
 
 	// 駒の並べ替え
-	eachKindOfPieceDo(!(pos=="bc"), function(kindOfPiece){
+	eachKindOfPieceDo(!(isAssending), function(kindOfPiece){
 		capturedArea.children("."+kindOfPiece+".forefront").prependTo(capturedArea);
 	})
 
@@ -271,8 +279,19 @@ moveMethods.prototype.addPieceCountText = function(target,length){
 }
 
 // 画像IDを生成する
-moveMethods.prototype.createImageID = function (kindOfPiece,isReversed,isPromoted){
+moveMethods.prototype.createImageID = function (kindOfPiece,isBlack,isPromoted){
 	var imgID = new String();
+	if(isBlack){
+		imgID += PieceImageCode.black;
+	} else {
+		imgID += PieceImageCode.white;
+	}
+	if(isPromoted){
+		imgID += PieceImageCode.promoted;
+	}
+	if(UpsideDown.getState()){
+		imgID += PieceImageCode.upsideDown;
+	}
 	switch(kindOfPiece){
 		case PieceImageCode.OH:
 			imgID += PieceImageCode.OH; break;
@@ -291,12 +310,6 @@ moveMethods.prototype.createImageID = function (kindOfPiece,isReversed,isPromote
 		case PieceImageCode.FU:
 			imgID += PieceImageCode.FU; break;
 		}
-	if(!isReversed){
-		imgID += PieceImageCode.reverse;
-	}
-	if(isPromoted){
-		imgID += PieceImageCode.promoted;
-	}
 	return imgID;
 }
 

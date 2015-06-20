@@ -11,8 +11,9 @@ var isReserving = false;
 var ReservingCount;
 var isOhte = false;
 var reservedPos = 0;
-
 PieceImageCode = new Object();
+PieceImageCode.black = 'black/';
+PieceImageCode.white = 'white/';
 PieceImageCode.OH = "OH";
 PieceImageCode.KIN = "KIN";
 PieceImageCode.GIN = "GIN";
@@ -23,7 +24,8 @@ PieceImageCode.HISHA = "HISHA";
 PieceImageCode.FU = "FU";
 PieceImageCode.separator = "_";
 PieceImageCode.reverse = "r";
-PieceImageCode.promoted = "p";
+PieceImageCode.promoted = "promoted/";
+PieceImageCode.upsideDown = "upside_down/";
 
 // 駒の種類
 const OH = 0;
